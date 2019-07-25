@@ -26,6 +26,8 @@
         <mybatis.plus.boot.starter.version>3.0.1</mybatis.plus.boot.starter.version>
         <hutool.version>4.5.10</hutool.version>
         <druid.version>1.1.10</druid.version>
+        <amqp.rabbit>2.0.1.RELEASE</amqp.rabbit>
+        <json.jackson>2.9.3</json.jackson>
         <mysql.connector.version>8.0.11</mysql.connector.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -55,6 +57,16 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${amqp.rabbit}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${json.jackson}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -47,4 +47,19 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-
+spring:
+  rabbitmq:
+    host: 192.168.0.199
+    port: 5672
+    username: xiqiuwei
+    password: 123456
+    virtual-host: /
+    listener:
+      concurrency: 1 # 最小消费者数量
+      max-concurrency: 10 # 最大消费者数量
+      acknowledge-mode: manual #手动ack
+      publisher-confirms: true # 发送确认
+      publisher-returns: true # 发送失败返回
+      simple:
+        retry:
+          enabled: true # 重试机制
