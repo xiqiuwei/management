@@ -2,15 +2,18 @@ package com.management.warehouse.core.rabbittest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.config.DirectRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.autoconfigure.amqp.DirectRabbitListenerContainerFactoryConfigurer;
 import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,35 +36,39 @@ public class RabbitConfig {
     @Autowired
     private CachingConnectionFactory connectionFactory;
     @Autowired
-    private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigurer;
-
+    private SimpleRabbitListenerContainerFactoryConfigurer simpleFactoryConfigurer;
+    @Autowired
+    private DirectRabbitListenerContainerFactoryConfigurer directFactoryConfigurer;
 
     /**
      * 多消费者配置
      *
      * @return
      */
-    @Bean("multiListener")
-    public SimpleRabbitListenerContainerFactory listenerContainerFactory() {
+    @Bean("simpleListener")
+    public SimpleRabbitListenerContainerFactory simpleListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory simpleFactory = new SimpleRabbitListenerContainerFactory();
         simpleFactory.setConnectionFactory(connectionFactory);
-        simpleFactory.setAcknowledgeMode(env.getProperty("spring.rabbitmq.listener.acknowledge-mode", AcknowledgeMode.class));
-        simpleFactory.setConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.concurrency", Integer.class));
-        simpleFactory.setMaxConcurrentConsumers(env.getProperty("spring.rabbitmq.listener.max-concurrency", Integer.class));
-        factoryConfigurer.configure(simpleFactory, connectionFactory);
+        //simpleFactory.setMessageConverter(messageConverter());
+        simpleFactoryConfigurer.configure(simpleFactory, connectionFactory);
         return simpleFactory;
     }
 
-    /**
-     * 序列化消息
-     *
-     * @return
-     */
-    @Bean
-    public MessageConverter jsonMessage() {
-        return new Jackson2JsonMessageConverter();
-    }
+   /* @Bean("directListener")
+    public DirectRabbitListenerContainerFactory directListenerContainerFactory () {
+        DirectRabbitListenerContainerFactory directFactory = new DirectRabbitListenerContainerFactory();
+        directFactory.setConnectionFactory(connectionFactory);
+        // 最大并发性
+        //directFactory.setTaskExecutor();
+        return directFactory;
+    }*/
 
+
+   /* @Bean
+    public MessageConverter messageConverter() {
+        return new ContentTypeDelegatingMessageConverter(new Jackson2JsonMessageConverter());
+    }
+*/
     /**
      * @return org.springframework.amqp.rabbit.core.RabbitAdmin
      * @Author xiqiuwei
@@ -79,18 +86,24 @@ public class RabbitConfig {
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMandatory(true);
-        // 发送确认
-        rabbitTemplate.setConfirmCallback((correlationData, result, cause) -> {
-            if (!result) {
-                throw new RuntimeException("发送失败的原因是:" + cause);
+        //rabbitTemplate.setMessageConverter(messageConverter());
+        // 发送确认看消息到没到交换机
+        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
+            if (ack) {
+                log.info("这是ack消息到了交换机:{}",ack);
+                log.info("这是消息的唯一id:{}",correlationData.getId());
+            }else {
+                log.error("这是错误的ack消息:{}",cause);
+                throw new RuntimeException("发送消息失败的原因是:" + cause);
             }
         });
+        // 如果消息到了交换机然后出错的话就会走这个方法
+        rabbitTemplate.setMandatory(true);
         rabbitTemplate.setReturnCallback((message,replyCode,replyText,exchange,routingKey)->{
-            log.info("消息丢失:exchange({}),route({}),replyCode({}),replyText({}),message:{}",exchange,routingKey,replyCode,replyText,message);
+            log.info("消息内容:{}",new String(message.getBody()));
+            log.info("回复文本:{},回复代码：{}",replyText,replyCode);
+            log.info("交换器名称:{},路由键：{}",exchange,routingKey);
         });
-        // rabbitMQ消息序列化
-        rabbitTemplate.setMessageConverter(jsonMessage());
         return rabbitTemplate;
     }
 

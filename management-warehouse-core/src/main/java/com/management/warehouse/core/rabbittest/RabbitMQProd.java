@@ -6,12 +6,16 @@ import com.management.warehouse.core.entity.User;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageDeliveryMode;
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 /**
  * @Author xiqiuwei
@@ -28,9 +32,11 @@ public class RabbitMQProd {
     @PostMapping("/user")
     public void prod (@RequestBody User user) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        rabbitTemplate.setExchange("directExchange");
-        rabbitTemplate.setRoutingKey("myRoutingKey");
+       /* rabbitTemplate.setExchange("directExchange");
+        rabbitTemplate.setRoutingKey("myRoutingKey");*/
+        CorrelationData correlationData = new CorrelationData();
+        correlationData.setId(UUID.randomUUID().toString());
         Message message = MessageBuilder.withBody(objectMapper.writeValueAsBytes(user)).setDeliveryMode(MessageDeliveryMode.PERSISTENT).build();
-        rabbitTemplate.convertAndSend(message);
+        rabbitTemplate.convertAndSend("directExchange","myRoutingKey",message,correlationData);
     }
 }
