@@ -29,14 +29,18 @@ public class RabbitMQProd {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
+
     @PostMapping("/user")
-    public void prod (@RequestBody User user) throws JsonProcessingException {
+    public void prod(@RequestBody User user) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
        /* rabbitTemplate.setExchange("directExchange");
         rabbitTemplate.setRoutingKey("myRoutingKey");*/
         CorrelationData correlationData = new CorrelationData();
         correlationData.setId(UUID.randomUUID().toString());
-        Message message = MessageBuilder.withBody(objectMapper.writeValueAsBytes(user)).setDeliveryMode(MessageDeliveryMode.PERSISTENT).build();
-        rabbitTemplate.convertAndSend("directExchange","myRoutingKey",message,correlationData);
+        Message message = MessageBuilder.withBody(objectMapper.writeValueAsBytes(user))
+                .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+               // .setHeader("error","三土这个傻逼打篮球想那条鲲一样")
+                .build();
+        rabbitTemplate.convertAndSend("directExchange", "myRoutingKey", message, correlationData);
     }
 }

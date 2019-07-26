@@ -2,10 +2,7 @@ package com.management.warehouse.core.rabbittest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.management.warehouse.core.entity.User;
-import com.rabbitmq.client.AMQP;
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.DefaultConsumer;
-import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -13,6 +10,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @Author xiqiuwei
@@ -24,9 +22,12 @@ import java.io.IOException;
 public class RabbitMQConsumer {
 
     @RabbitListener(queues = "myQueue", containerFactory = "simpleListener")
-    public void consumer(@Payload byte[] message, @Header(AmqpHeaders.DELIVERY_TAG) long delivery, Channel channel) throws IOException {
-        // 手动ack消息确认
-        channel.basicAck(delivery, false);
+    public void consumer(@Payload byte[] message,@Header(AmqpHeaders.DELIVERY_TAG) Long delivery, Channel channel) throws IOException {
+//        if (map.get("error") != null){
+//            System.out.println(map.get("error"));
+//        }
+            // 手动ack消息确认
+        channel.basicAck(delivery,false);
         //channel.basicNack(delivery, false, true);
         ObjectMapper objectMapper = new ObjectMapper();
         User user = objectMapper.readValue(message, User.class);
