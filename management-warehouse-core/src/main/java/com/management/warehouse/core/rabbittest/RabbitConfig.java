@@ -2,19 +2,14 @@ package com.management.warehouse.core.rabbittest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.config.DirectRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.config.RetryInterceptorBuilder;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.rabbit.retry.RepublishMessageRecoverer;
-import org.springframework.amqp.rabbit.support.DefaultMessagePropertiesConverter;
 import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.amqp.DirectRabbitListenerContainerFactoryConfigurer;
 import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
@@ -22,14 +17,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
-import org.springframework.retry.RetryCallback;
-import org.springframework.retry.RetryContext;
-import org.springframework.retry.RetryListener;
-import org.springframework.retry.backoff.NoBackOffPolicy;
-import org.springframework.retry.interceptor.RetryOperationsInterceptor;
-import org.springframework.retry.policy.SimpleRetryPolicy;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.support.RetryTemplate;
-import org.springframework.validation.DefaultMessageCodesResolver;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @SuppressWarnings("all")
@@ -50,6 +42,18 @@ public class RabbitConfig {
     private SimpleRabbitListenerContainerFactoryConfigurer simpleFactoryConfigurer;
     @Autowired
     private DirectRabbitListenerContainerFactoryConfigurer directFactoryConfigurer;
+    // 普通队列名
+    private static final String commonQueue = "commonQueue";
+    // 死信队列名
+    private static final String deadQueue = "deadQueue";
+    // 普通交换机名
+    private static final String commonExchange = "commonExchange";
+    // 死信交换机名
+    private static final String deadExchange = "deadExchange";
+    // 普通路由键名
+    private static final String commonRoutingKey = "commonRoutingKey";
+    // 死信路由键名
+    private static final String deadRoutingKey = "deadRoutingKey";
 
     /**
      * 多消费者配置
@@ -60,7 +64,7 @@ public class RabbitConfig {
     public SimpleRabbitListenerContainerFactory simpleListenerContainerFactory() {
         SimpleRabbitListenerContainerFactory simpleFactory = new SimpleRabbitListenerContainerFactory();
         simpleFactory.setConnectionFactory(connectionFactory);
-        //simpleFactory.setMessageConverter(messageConverter());
+        simpleFactory.setMessageConverter(messageConverter());
         simpleFactory.setAdviceChain();
         simpleFactoryConfigurer.configure(simpleFactory, connectionFactory);
         return simpleFactory;
@@ -76,11 +80,10 @@ public class RabbitConfig {
     }*/
 
 
-   /* @Bean
+    @Bean
     public MessageConverter messageConverter() {
         return new ContentTypeDelegatingMessageConverter(new Jackson2JsonMessageConverter());
     }
-*/
 
     /**
      * @return org.springframework.amqp.rabbit.core.RabbitAdmin
@@ -95,22 +98,31 @@ public class RabbitConfig {
         return rabbitAdmin;
     }
 
+    /**
+     * @return org.springframework.amqp.rabbit.core.RabbitTemplate
+     * @Author xiqiuwei
+     * @Date 21:55  2019/7/29
+     * @Param []
+     * @Description rabbitMQ初始化的时候会将自定义得bean注入到spring
+     */
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        //rabbitTemplate.setMessageConverter(messageConverter());
-        // 发送确认看消息到没到交换机
+        rabbitTemplate.setMessageConverter(messageConverter());
+        // 消息发送到交换机前，失败后callback
         rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
             if (ack) {
                 log.info("这是ack消息到了交换机:{}", ack);
-                log.info("这是消息的唯一id:{}", correlationData.getId());
             } else {
                 log.error("这是错误的ack消息:{}", cause);
                 throw new RuntimeException("发送消息失败的原因是:" + cause);
+                // TODO 也可以讲异常原因放数据库货缓存便于查找
             }
         });
-        // 如果消息到了交换机然后出错的话就会走这个方法
+        // 模板设置重试机制
+        rabbitTemplate.setRetryTemplate(retryTemplate());
+        // 消息发送到队列前，失败后callback
         rabbitTemplate.setMandatory(true);
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
             log.info("消息内容:{}", new String(message.getBody()));
@@ -120,26 +132,56 @@ public class RabbitConfig {
         return rabbitTemplate;
     }
 
+
     /**
      * @return org.springframework.amqp.core.Queue
      * @Author xiqiuwei
-     * @Date 18:16  2019/7/25
+     * @Date 15:04  2019/7/29
      * @Param []
-     * @Description 创建队列
+     * @Description 创建死信队列
      */
     @Bean
-    public Queue userQueue() {
-        return new Queue("myQueue", true);
+    public Queue deadUserQueue() {
+        Map<String, Object> params = new HashMap<>();
+        // x-dead-letter-exchange 声明了队列里的死信转发到的DLX名称，
+        params.put("x-dead-letter-exchange", deadExchange);
+        // x-dead-letter-routing-key 声明了这些死信在转发时携带的 routing-key 名称。
+        params.put("x-dead-letter-routing-key", deadRoutingKey);
+        return new Queue(deadQueue, true, false, false, params);
     }
 
     /**
-     * 创建交换机
+     * 普通交换机
      *
      * @return
      */
     @Bean
     public DirectExchange directExchange() {
-        return new DirectExchange("directExchange", true, false);
+        return new DirectExchange(commonExchange, true, false);
+    }
+
+    /**
+     * @return org.springframework.amqp.core.DirectExchange
+     * @Author xiqiuwei
+     * @Date 14:53  2019/7/29
+     * @Param []
+     * @Description 死信交换机
+     */
+    @Bean
+    public DirectExchange deadExchange() {
+        return new DirectExchange(deadExchange, true, false);
+    }
+
+    /**
+     * @return org.springframework.amqp.core.Queue
+     * @Author xiqiuwei
+     * @Date 18:16  2019/7/25
+     * @Param []
+     * @Description 创建普通队列
+     */
+    @Bean
+    public Queue userQueue() {
+        return new Queue(commonQueue, true);
     }
 
     /**
@@ -147,43 +189,40 @@ public class RabbitConfig {
      * @Author xiqiuwei
      * @Date 18:37  2019/7/25
      * @Param []
-     * @Description 将队列通过routingKey绑定到交换机
+     * @Description 创建基本交换机+基本路由 -> 死信队列 的绑定
      */
     @Bean
-    public Binding bindingQueueToExchange() {
-        return BindingBuilder.bind(userQueue()).to(directExchange()).with("myRoutingKey");
+    public Binding bindingQueue() {
+        return BindingBuilder.bind(deadUserQueue()).to(directExchange()).with(commonRoutingKey);
     }
 
     /**
-     * @return org.springframework.retry.interceptor.RetryOperationsInterceptor
+     * @return org.springframework.amqp.core.Binding
      * @Author xiqiuwei
-     * @Date 17:03  2019/7/26
+     * @Date 15:11  2019/7/29
      * @Param []
-     * @Description
+     * @Description 死信路由键+死信交换机->普通队列最终消费消息的地方
      */
-    private RetryOperationsInterceptor retryStrategy() {
-        RetryTemplate retryTemplate = new RetryTemplate();
-        retryTemplate.registerListener(new RetryListener() {
-            @Override
-            public <T, E extends Throwable> boolean open(RetryContext retryContext, RetryCallback<T, E> retryCallback) {
-                // 第一次失败调用
-                log.error("第一次调用失败了");
-                return false;
-            }
-
-            @Override
-            public <T, E extends Throwable> void close(RetryContext retryContext, RetryCallback<T, E> retryCallback, Throwable throwable) {
-                log.error("第二次失败:{}",throwable);
-            }
-
-            @Override
-            public <T, E extends Throwable> void onError(RetryContext retryContext, RetryCallback<T, E> retryCallback, Throwable throwable) {
-                log.error("每次失败:{}",throwable);
-            }
-        });
-        retryTemplate.setRetryPolicy(new SimpleRetryPolicy());
-        retryTemplate.setBackOffPolicy(new NoBackOffPolicy());
-        return null;
+    @Bean
+    public Binding deadBindingQueue() {
+        return BindingBuilder.bind(userQueue()).to(deadExchange()).with(deadRoutingKey);
     }
 
+    /**
+     * @return org.springframework.retry.support.RetryTemplate
+     * @Author xiqiuwei
+     * @Date 21:32  2019/7/29
+     * @Param []
+     * @Description rabbitMQ重试机制
+     */
+    @Bean
+    public RetryTemplate retryTemplate() {
+        RetryTemplate retryTemplate = new RetryTemplate();
+        ExponentialBackOffPolicy exponentialBackOff = new ExponentialBackOffPolicy();
+        exponentialBackOff.setInitialInterval(1000);
+        exponentialBackOff.setMaxInterval(60000);
+        exponentialBackOff.setMultiplier(1.5);
+        retryTemplate.setBackOffPolicy(exponentialBackOff);
+        return retryTemplate;
+    }
 }
