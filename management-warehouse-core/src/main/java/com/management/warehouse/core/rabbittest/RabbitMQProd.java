@@ -3,6 +3,7 @@ package com.management.warehouse.core.rabbittest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.management.warehouse.core.entity.User;
+import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageDeliveryMode;
@@ -26,17 +27,20 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/base")
 public class RabbitMQProd {
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    @Autowired
+    private RabbitMqMessageProducer rabbitMqMessageProducer;
+
     @PostMapping("/user")
-    public void prod (@RequestBody User user) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-       /* rabbitTemplate.setExchange("directExchange");
-        rabbitTemplate.setRoutingKey("myRoutingKey");*/
+    public void prod(@RequestBody User user) {
+        String routingKey = "commonRoutingKey";
+        String exchange = "commonExchange";
+        rabbitTemplate.setRoutingKey(routingKey);
+        rabbitTemplate.setExchange(exchange);
+        Long expire = 10000L;
         CorrelationData correlationData = new CorrelationData();
         correlationData.setId(UUID.randomUUID().toString());
-        Message message = MessageBuilder.withBody(objectMapper.writeValueAsBytes(user)).setDeliveryMode(MessageDeliveryMode.PERSISTENT).build();
-        rabbitTemplate.convertAndSend("directExchange","myRoutingKey",message,correlationData);
+        rabbitMqMessageProducer.sendDelay(exchange,routingKey,user,expire,correlationData);
     }
 }
