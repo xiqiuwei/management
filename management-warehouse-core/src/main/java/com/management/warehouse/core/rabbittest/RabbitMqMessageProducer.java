@@ -44,8 +44,8 @@ public class RabbitMqMessageProducer extends MessageProducer {
      * @return com.management.warehouse.core.rabbittest.MessageResponse
      * @Author xiqiuwei
      * @Date 11:44  2019/7/29
-     * @Param [routingKey, message, delayTime]
-     * @Description
+     * @Param [routingKey, message, expiration]
+     * @Description 死信队列 TTL模式当TTL过期的时候会将消息route到普通队列里面进行消费
      */
     @Override
     public MessageResponse sendDelay(String exchange, String routingKey, Object message,Long expiration, CorrelationData correlationData) {
@@ -93,7 +93,7 @@ public class RabbitMqMessageProducer extends MessageProducer {
             rabbitTemplate.convertAndSend(exchange,routingKey, message, messagePost -> {
                 // 消息持久化
                 messagePost.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
-                // 延迟队列时间差
+                // 延迟队列时间差,和TTL有所区别的是此消息是延迟多久推送出去
                 messagePost.getMessageProperties().setDelay((int)delay);
                 messagePost.getMessageProperties().setHeader("error","三土打篮球像那条鲲一样，头部消息看自己的需求");
                 return messagePost;
