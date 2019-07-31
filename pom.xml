@@ -18,6 +18,7 @@
     <modules>
         <module>management-warehouse-core</module>
         <module>management-warehouse-web</module>
+        <module>management-rabbitmq-demo</module>
     </modules>
 
     <properties>

@@ -47,31 +47,4 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: false
-spring:
-  rabbitmq:
-    host: 192.168.0.199
-    port: 5672
-    username: xiqiuwei
-    password: 123456
-    virtual-host: / # 连接rabbitMQ的vhost
-    publisher-confirms: true # 发布确认
-    publisher-returns: true # 发布返回
-    connection-timeout: 3000 # 连接超时设置 0表示不超时
-    listener:
-      simple:
-        acknowledge-mode: manual #手动ack
-        max-concurrency: 10 # 最大的消费者数量
-        concurrency: 1 # 最小的消费者数量
-        prefetch: 3 # 指定一个请求能处理多少个消息，如果有事务的话必须大于等于transaction数量
-        transaction-size: 2 # 指定一个事务处理的消息数量，小于等于prefetch数量
-        retry:
-          enabled: true # 监听重试是否可用
-          max-attempts: 2 # 最大重试次数
-          initial-interval: 2000 # 重试的间隔
-    template:
-      mandatory: true # 启用强制信息
-      retry:
-        enabled: true # 发送重试是否可用
-        max-attempts: 2 # 最大重试次数
-        initial-interval: 2000 # 重试的间隔
 
