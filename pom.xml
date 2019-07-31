@@ -28,6 +28,7 @@
         <hutool.version>4.5.10</hutool.version>
         <druid.version>1.1.10</druid.version>
         <amqp.rabbit>2.0.1.RELEASE</amqp.rabbit>
+        <jedis.version>2.9.0</jedis.version>
         <json.jackson>2.9.3</json.jackson>
         <mysql.connector.version>8.0.11</mysql.connector.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -68,6 +69,11 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
                 <version>${json.jackson}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
