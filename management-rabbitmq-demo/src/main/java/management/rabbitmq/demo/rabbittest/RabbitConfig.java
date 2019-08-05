@@ -114,11 +114,11 @@ public class RabbitConfig {
      * @return org.springframework.amqp.rabbit.core.RabbitTemplate
      * @Author xiqiuwei
      * @Date 21:55  2019/7/29
-     * @Param []
+     * @Param
      * @Description rabbitMQ初始化的时候会将自定义得bean注入到spring
      */
     @Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE) // 每次注入的时候会创建一个新的实例
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(messageConverter());
@@ -129,7 +129,7 @@ public class RabbitConfig {
             } else {
                 log.error("这是错误的ack消息:{}", cause);
                 throw new RuntimeException("发送消息失败的原因是:" + cause);
-                // TODO 也可以讲异常原因放数据库货缓存便于查找
+                // TODO 处理自己的业务
             }
         });
         // 模板设置重试机制
@@ -137,6 +137,7 @@ public class RabbitConfig {
         // 消息发送到队列前，失败后callback
         rabbitTemplate.setMandatory(true);
         rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
+            // TODO 处理自己的业务
             log.info("消息内容:{}", new String(message.getBody()));
             log.info("回复文本:{},回复代码：{}", replyText, replyCode);
             log.info("交换器名称:{},路由键：{}", exchange, routingKey);
@@ -159,6 +160,8 @@ public class RabbitConfig {
         params.put("x-dead-letter-exchange", deadExchange);
         // x-dead-letter-routing-key 声明了这些死信在转发时携带的 routing-key 名称。
         params.put("x-dead-letter-routing-key", deadRoutingKey);
+        // 也可以统一设置队列的过期时间
+        // params.put("x-message-ttl",50000);
         return new Queue(deadQueue, true, false, false, params);
     }
 
