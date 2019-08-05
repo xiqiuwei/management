@@ -6,29 +6,28 @@ server:
 
 spring:
   rabbitmq:
-    host: 192.168.0.199
+    host: 192.168.0.197
     port: 5672
     username: xiqiuwei
     password: 123456
-    virtual-host: / # Á¬½ÓrabbitMQµÄvhost
-    publisher-confirms: true # ·¢²¼È·ÈÏ
-    publisher-returns: true # ·¢²¼·µ»Ø
-    connection-timeout: 3000 # Á¬½Ó³¬Ê±ÉèÖÃ 0±íÊ¾²»³¬Ê±
+    virtual-host: / # rabbitçš„vhost
+    publisher-confirms: true # å‘å¸ƒç¡®è®¤
+    publisher-returns: true # å‘å¸ƒè¿”å›
+    connection-timeout: 3000 # è¿æ¥è¶…æ—¶ï¼Œ0è¡¨ç¤ºä¸è¶…æ—¶
     listener:
       simple:
-        acknowledge-mode: manual #ÊÖ¶¯ack
-        max-concurrency: 10 # ×î´óµÄÏû·ÑÕßÊıÁ¿
-        concurrency: 1 # ×îĞ¡µÄÏû·ÑÕßÊıÁ¿
-        prefetch: 3 # Ö¸¶¨Ò»¸öÇëÇóÄÜ´¦Àí¶àÉÙ¸öÏûÏ¢£¬Èç¹ûÓĞÊÂÎñµÄ»°±ØĞë´óÓÚµÈÓÚtransactionÊıÁ¿
-        transaction-size: 2 # Ö¸¶¨Ò»¸öÊÂÎñ´¦ÀíµÄÏûÏ¢ÊıÁ¿£¬Ğ¡ÓÚµÈÓÚprefetchÊıÁ¿
+        acknowledge-mode: manual # æ‰‹åŠ¨ack
+        max-concurrency: 10 # æœ€å¤§çš„æ¶ˆè´¹è€…æ•°é‡
+        concurrency: 1 # æœ€å°çš„æ¶ˆè´¹è€…æ•°é‡
+        prefetch: 3 # æŒ‡å®šä¸€ä¸ªè¯·æ±‚èƒ½å¤„ç†å¤šå°‘ä¸ªæ¶ˆæ¯ï¼Œå¦‚æœæœ‰äº‹åŠ¡çš„ç”»å¿…é¡»å¤§äºtransactionæ•°é‡
+        transaction-size: 2 # æŒ‡å®šä¸€ä¸ªäº‹åŠ¡èƒ½å¤„ç†çš„æ•°é‡ï¼Œå°äºç­‰äºprefetchæ•°é‡
         retry:
-          enabled: true # ¼àÌıÖØÊÔÊÇ·ñ¿ÉÓÃ
-          max-attempts: 2 # ×î´óÖØÊÔ´ÎÊı
-          initial-interval: 2000 # ÖØÊÔµÄ¼ä¸ô
+          enabled: true # å¼€å¯é‡è¯•åŠŸèƒ½
+          max-attempts: 2 # æœ€å¤§é‡è¯•æ•°é‡ 2
+          initial-interval: 2000 # é‡è¯•çš„é—´éš” 2000ms
     template:
-      mandatory: true # ÆôÓÃÇ¿ÖÆĞÅÏ¢
+      mandatory: true # å¯ç”¨å¼ºåˆ¶ä¿¡æ¯
       retry:
-        enabled: true # ·¢ËÍÖØÊÔÊÇ·ñ¿ÉÓÃ
-#        max-attempts: 2 # ×î´óÖØÊÔ´ÎÊı
-#        initial-interval: 2000 # ÖØÊÔµÄ¼ä¸ô
-
+        enabled: true # å¼€å¯é‡è¯•åŠŸèƒ½
+#        max-attempts: 2
+#        initial-interval: 2000
