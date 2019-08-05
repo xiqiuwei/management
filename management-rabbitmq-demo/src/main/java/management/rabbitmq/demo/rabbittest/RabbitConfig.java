@@ -1,6 +1,8 @@
 package management.rabbitmq.demo.rabbittest;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import lombok.extern.slf4j.Slf4j;
+import management.rabbitmq.demo.exception.CommonException;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
@@ -20,9 +22,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
+import org.springframework.retry.RecoveryCallback;
+import org.springframework.retry.RetryCallback;
+import org.springframework.retry.RetryContext;
+import org.springframework.retry.RetryPolicy;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.backoff.ThreadWaitSleeper;
+import org.springframework.retry.policy.SimpleRetryPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -216,16 +225,51 @@ public class RabbitConfig {
      * @Author xiqiuwei
      * @Date 21:32  2019/7/29
      * @Param []
-     * @Description rabbitMQ重试机制
+     * @Description spring自带的retry重试机制
      */
     @Bean
     public RetryTemplate retryTemplate() {
         RetryTemplate retryTemplate = new RetryTemplate();
+        // 重试策略
         ExponentialBackOffPolicy exponentialBackOff = new ExponentialBackOffPolicy();
+        // 重试时间间隔
         exponentialBackOff.setInitialInterval(1000);
+        // 重试的最大时间间隔
         exponentialBackOff.setMaxInterval(60000);
-        exponentialBackOff.setMultiplier(1.5);
+        // 指定延迟的倍数，不如第一次1000ms的那么第二次就是2000ms
+        exponentialBackOff.setMultiplier(2);
+        exponentialBackOff.setSleeper(new ThreadWaitSleeper());
+        // 将重试策略set到retryTemplate中
         retryTemplate.setBackOffPolicy(exponentialBackOff);
+        // 重试次数
+        RetryPolicy retryPolicy =
+                new SimpleRetryPolicy(2, Collections.<Class<? extends Throwable>, Boolean>singletonMap(Exception.class, true));
+        retryTemplate.setRetryPolicy(retryPolicy);
+        // 重试次数内会走这个方法
+        RetryCallback<Object, Exception> retryCallback = new RetryCallback<Object, Exception>() {
+            @Override
+            public Object doWithRetry(RetryContext retryContext) throws Exception {
+                // TODO 这里可以写自己的逻辑业务
+                log.info("这是重试的次数:{}", retryContext);
+                // 可以给当前的context传递一些键值对信息
+                retryContext.setAttribute("error", "看三土打篮球像菜虚困");
+                throw new Exception("重试次数达到上限还是报错");
+            }
+        };
+        // 这个方法是重试次数达到了上限并且还抛异常的情况下才会走
+        RecoveryCallback<Object> recoveryCallback = new RecoveryCallback<Object>() {
+            @Override
+            public Object recover(RetryContext retryContext) throws Exception {
+                // TODO 这里可以写自己的逻辑业务
+                log.info("这是报错信息:{}", retryContext.getLastThrowable().getMessage());
+                return null;
+            }
+        };
+        try {
+            retryTemplate.execute(retryCallback,recoveryCallback);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return retryTemplate;
     }
 }

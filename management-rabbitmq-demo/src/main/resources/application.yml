@@ -29,6 +29,6 @@ spring:
       mandatory: true # 启用强制信息
       retry:
         enabled: true # 发送重试是否可用
-        max-attempts: 2 # 最大重试次数
-        initial-interval: 2000 # 重试的间隔
+#        max-attempts: 2 # 最大重试次数
+#        initial-interval: 2000 # 重试的间隔
 
