@@ -1,0 +1,15 @@
+server:
+  port: 8989
+  tomcat:
+    uri-encoding: UTF-8
+
+### Thymeleaf 模板引擎
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5 # 取消Thymeleaf使用nekohtml
+    cache: false # 取消缓存
+    encoding: UTF-8 # 编码格式utf-8
+    suffix: .html # 设置后缀
+    prefix: classpath:/templates/views/ # 设置前缀
+    check-template-location: true # 检查模板位置是否存在
+

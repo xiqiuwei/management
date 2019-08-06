@@ -19,6 +19,7 @@
         <module>management-warehouse-core</module>
         <module>management-warehouse-web</module>
         <module>management-rabbitmq-demo</module>
+        <module>management-controlleradvice-demo</module>
     </modules>
 
     <properties>
@@ -57,10 +58,10 @@
             </dependency>
 
             <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-amqp</artifactId>
