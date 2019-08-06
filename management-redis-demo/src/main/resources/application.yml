@@ -3,9 +3,12 @@ server:
   port: 8890
   tomcat:
     uri-encoding: UTF-8
-
-### redis配置
+# spring配置
 spring:
+  ### 服务名称
+  application:
+    name: redis_server
+  ### redis配置
   redis:
     # Redis数据库索引（默认为0）
     database: 0
