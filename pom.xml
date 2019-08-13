@@ -28,6 +28,8 @@
         <module>management-eureka-cluster-three</module>
         <!--redis缓存-->
         <module>management-redis-demo</module>
+        <!--jwt登录校验-->
+        <module>management-jwt-demo</module>
     </modules>
 
     <properties>
@@ -40,6 +42,7 @@
         <jedis.version>2.9.0</jedis.version>
         <redis.version>2.1.5.RELEASE</redis.version>
         <json.jackson>2.9.3</json.jackson>
+        <jwt.version>0.9.1</jwt.version>
         <mysql.connector.version>8.0.11</mysql.connector.version>
         <spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
         <spring-cloud.eureka>1.4.4.RELEASE</spring-cloud.eureka>
@@ -105,6 +108,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>${redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

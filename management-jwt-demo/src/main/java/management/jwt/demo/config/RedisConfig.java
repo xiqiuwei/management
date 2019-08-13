@@ -1,26 +1,26 @@
-package com.management.redis.demo.redisconfig;
+package management.jwt.demo.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+
 @SuppressWarnings("ALL")
 /**
  * @Author xiqiuwei
- * @Date Created in 15:12 2019/8/1
+ * @Date Created in 15:44 2019/8/12
  * @Description
  * @Modified By:
  */
-@Configuration
 public class RedisConfig {
+
     @Value("${spring.redis.host}")
     private String host;
 
@@ -45,25 +45,17 @@ public class RedisConfig {
     @Value("${spring.redis.jedis.pool.max-active}")
     private long maxActive;
 
-
     @Bean
-    public JedisPool redisPoolFactory () {
+    public JedisPool redisPoolFactory() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        return new JedisPool(jedisPoolConfig,host,port,timeout,password);
+        return new JedisPool(jedisPoolConfig, host, port, timeout, password);
     }
 
-    /**
-     *@Author xiqiuwei
-     *@Date 17:00  2019/8/1
-     *@Param [redisConnectionFactory]
-     *@return org.springframework.data.redis.core.RedisTemplate<java.lang.Object,java.lang.Object>
-     *@Description redis序列化对象的问题
-     */
     @Bean
-    public RedisTemplate<Object,Object> redisTemplate (RedisConnectionFactory redisConnectionFactory) {
+    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
@@ -78,6 +70,5 @@ public class RedisConfig {
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }
-
 
 }
