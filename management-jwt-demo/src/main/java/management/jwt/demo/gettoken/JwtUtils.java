@@ -1,13 +1,17 @@
 package management.jwt.demo.gettoken;
 
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import management.jwt.demo.entity.User;
 import management.jwt.demo.entity.UserThreadLocal;
+import management.jwt.demo.exception.CommonException;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.security.interfaces.RSAPrivateKey;
@@ -20,7 +24,6 @@ import java.util.Date;
  * @Description
  * @Modified By:
  */
-@Component
 public class JwtUtils {
 
     private RSAUtils rsaUtils = new RSAUtils();
@@ -31,24 +34,29 @@ public class JwtUtils {
      * @Date 20:07  2019/8/12
      * @Param []
      * @Description 后端自定义token将用户的信息放在载荷当中，返回给前端，
-     *              每次前端请求的时候都放在header中传到后端进行解析这里
-     *              存在一个以为，RSA加密token只能用私钥加密，公钥报错；
+     * 每次前端请求的时候都放在header中传到后端进行解析这里
+     * 存在一个以为，RSA加密token只能用私钥加密，公钥报错；
      */
-    public String createToken() throws Exception {
-
+    public String createToken(String userName, String password) throws Exception {
         InputStream inputStream = new ClassPathResource("/static/rsa.pri").getInputStream();
         String s = rsaUtils.readFile(inputStream);
         RSAPrivateKey privateKey = rsaUtils.getPrivateKey(s);
+        InputStream inputStream1 = new ClassPathResource("/static/rsa.pub").getInputStream();
+        String s1 = rsaUtils.readFile(inputStream1);
+        RSAPublicKey publicKey = rsaUtils.getPublicKey(s1);
         // 用户名和密码是数据库里面的数据
         // 可以将生成的token放到缓存中加TTL，当用户每次请求接口时刷新token的TTL
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .signWith(SignatureAlgorithm.RS256, privateKey)
-                .claim("userName", "18321911103") // 数据库当中的用户信息
-                .claim("password", "123456") // 数据库中的用户的密码
+                .claim("userName", userName) // 数据库当中的用户信息
+                .claim("password", password) // 数据库中的用户的密码
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setSubject("APP")
                 .setAudience("SERVICE")
                 .compact();
+        // 校验token
+        this.verifyToken(token,publicKey,privateKey);
+        return token;
     }
 
     /**
@@ -57,7 +65,7 @@ public class JwtUtils {
      * @Date 9:56  2019/8/13
      * @Param [token]
      * @Description 可以将此方法写在aop或者拦截器，过滤器当中拿到请求中的Authorization
-     *              解析token中的载荷信息，当然还需要判断token的有效时间是否过期；
+     * 解析token中的载荷信息，当然还需要判断token的有效时间是否过期；
      */
     public void parseToken(String token) throws Exception {
         InputStream inputStream = new ClassPathResource("/static/rsa.pub").getInputStream();
@@ -70,6 +78,17 @@ public class JwtUtils {
         user.setUserName(userName);
         user.setPassword(password);
         UserThreadLocal.setLocalUser(user);
+    }
+
+
+    public void verifyToken(String token, RSAPublicKey rsaPublicKey, RSAPrivateKey rsaPrivateKey) {
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.RSA256(rsaPublicKey, rsaPrivateKey)).build();
+        try {
+            jwtVerifier.verify(token);
+        } catch (JWTVerificationException e) {
+            e.printStackTrace();
+            throw new CommonException("token过期了",-1);
+        }
     }
 
     // token包含三部分，JWT头，有效载荷，签名
