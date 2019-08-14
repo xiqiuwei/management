@@ -1,21 +1,16 @@
 package management.jwt.demo.filter;
 
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import management.jwt.demo.entity.ErrorCode;
-import management.jwt.demo.entity.ResponseEntity;
 import management.jwt.demo.gettoken.JwtUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.security.auth.login.LoginException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 /**

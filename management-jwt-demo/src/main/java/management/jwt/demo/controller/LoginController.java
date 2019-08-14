@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @Author xiqiuwei
  * @Date Created in 15:46 2019/8/13
- * @Description
+ * @Description CSRF XSS
  * @Modified By:
  */
 
@@ -32,8 +32,8 @@ public class LoginController {
         JwtUtils jwtUtils = new JwtUtils();
         // 数据库查出来的数据去判断是否有这个用户
         String token = jwtUtils.createToken("18321911103", "xiqiuwei");
-        // 将token设置到redis里面设置TTL
-        stringRedisTemplate.opsForValue().set("login:user:18321911103",token,5, TimeUnit.MINUTES);
+       /* // 将token设置到redis里面设置TTL,如果不用刷新token的TTL的话直接在创建jwt的时候就设置过期时间
+        stringRedisTemplate.opsForValue().set("login:user:18321911103",token,5, TimeUnit.MINUTES);*/
         return ResponseEntity.success(token);
     }
 }

@@ -1,0 +1,14 @@
+server:
+  port: 10011
+spring:
+  application:
+    name: eureka_server
+eureka:
+  instance:
+    hostname: eureka1.xiqiuwei.com
+  client:
+    register-with-eureka: true # 需要注册自己
+    fetch-registry: true  # 需要发现服务
+    ### 注册中心集群节点
+    service-url:
+      defaultZone: http://eureka1.xiqiuwei.com:10010/eureka,http://eureka3.xiqiuwei.com:10012/eureka

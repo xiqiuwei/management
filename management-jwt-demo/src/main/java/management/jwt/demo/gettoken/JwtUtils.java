@@ -46,13 +46,16 @@ public class JwtUtils {
         RSAPublicKey publicKey = rsaUtils.getPublicKey(s1);
         // 用户名和密码是数据库里面的数据
         // 可以将生成的token放到缓存中加TTL，当用户每次请求接口时刷新token的TTL
+        long currentTime = System.currentTimeMillis();
+        long expiration = 60000L;
         String token = Jwts.builder()
                 .signWith(SignatureAlgorithm.RS256, privateKey)
                 .claim("userName", userName) // 数据库当中的用户信息
                 .claim("password", password) // 数据库中的用户的密码
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setIssuedAt(new Date(currentTime))
                 .setSubject("APP")
                 .setAudience("SERVICE")
+                .setExpiration(new Date(currentTime + expiration))
                 .compact();
         // 校验token
         this.verifyToken(token,publicKey,privateKey);
@@ -81,7 +84,7 @@ public class JwtUtils {
     }
 
 
-    public void verifyToken(String token, RSAPublicKey rsaPublicKey, RSAPrivateKey rsaPrivateKey) {
+    private void verifyToken(String token, RSAPublicKey rsaPublicKey, RSAPrivateKey rsaPrivateKey) {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.RSA256(rsaPublicKey, rsaPrivateKey)).build();
         try {
             jwtVerifier.verify(token);

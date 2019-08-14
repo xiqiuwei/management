@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+    <title>覆盖区域及计价规则</title>
+    <style type="text/css">
+        body {
+            font-size: 16px;
+            color: #8f8f8f;
+        }
+
+        p {
+            margin: 0;
+            line-height: 2em;
+        }
+
+        .center {
+            margin: auto;
+        }
+
+        .her {
+            text-align: center;
+            color: #3c3c3c;
+            font-size: 14px;
+            margin: 10px 0px;
+        }
+
+
+        .module-title {
+            margin-left: 5px;
+            color: #3c3c3c;
+            font-size: 13px;
+        }
+
+        .list {
+            margin: 0;
+            padding: 0;
+            border-top: 1px solid #cccccc;
+        }
+
+        ul li {
+            list-style: none;
+            padding: 10px 10px 10px 0;
+            font-size: 12px;
+        }
+
+        .list-left {
+            margin-left: 5px;
+        }
+
+        .list-right {
+            text-align: right;
+            float: right;
+        }
+
+
+        .box {
+            height: 30px;
+            position: relative;
+            text-align: center;
+        }
+        .box::after{
+            content: '';
+            position: absolute;
+            z-index: 1;
+            left: 20px;
+            right: 20px;
+            top: 14px;
+            height: 1px;
+            background: #999999;
+        }
+        .box>div{
+            position: absolute;
+            z-index: 2;
+            height: 30px;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        .box>div>span{
+            display: inline-block;
+            background: #fff;
+            padding: 0 12px;
+        }
+    </style>
+</head>
+<body id="body">
+<div class="center">
+    <h1><span th:text="${MESSAGE}"></span></h1>
+    <h1><span th:text="${CODE}"></span></h1>
+</div>
+</body>
+</html>

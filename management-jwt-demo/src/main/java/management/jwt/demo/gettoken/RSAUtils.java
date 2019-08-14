@@ -1,5 +1,6 @@
 package management.jwt.demo.gettoken;
 
+import management.jwt.demo.exception.CommonException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
@@ -39,27 +40,28 @@ public class RSAUtils {
      * @Param []
      * @Description
      */
-    public Map<Integer, Object> genKeyPair() throws NoSuchAlgorithmException, IOException {
-        Map<Integer, Object> keyMap = new HashMap<>();
-        // KeyPairGenerator生成RSA的公钥和私钥对
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-        // 初始化KeyPairGenerator生成器
-        keyPairGenerator.initialize(KEY_SIZE);
-        // 生成一个公私钥对存放在keyPair中
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();
-        // 公钥
-        RSAPublicKey aPublic = (RSAPublicKey) keyPair.getPublic();
-        // 私钥
-        RSAPrivateKey aPrivate = (RSAPrivateKey) keyPair.getPrivate();
-        // RSA 加密或签名后的结果是不可读的二进制，使用时经常会转为 BASE64 码再传输
-        String publicKey = Base64.getEncoder().encodeToString(aPublic.getEncoded());
-        String privateKey = Base64.getEncoder().encodeToString(aPrivate.getEncoded());
-        this.writePubRSAIntoResource(publicKey);
-        this.writePriRSAIntoResource(privateKey);
-        // 加公钥私钥对存放到map中
-        keyMap.put(0, publicKey);
-        keyMap.put(1, privateKey);
-        return keyMap;
+    public void genKeyPair() {
+        try {
+            // KeyPairGenerator生成RSA的公钥和私钥对
+            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+            // 初始化KeyPairGenerator生成器
+            keyPairGenerator.initialize(KEY_SIZE);
+            // 生成一个公私钥对存放在keyPair中
+            KeyPair keyPair = keyPairGenerator.generateKeyPair();
+            // 公钥
+            RSAPublicKey aPublic = (RSAPublicKey) keyPair.getPublic();
+            // 私钥
+            RSAPrivateKey aPrivate = (RSAPrivateKey) keyPair.getPrivate();
+            // RSA 加密或签名后的结果是不可读的二进制，使用时经常会转为 BASE64 码再传输
+            String publicKey = Base64.getEncoder().encodeToString(aPublic.getEncoded());
+            String privateKey = Base64.getEncoder().encodeToString(aPrivate.getEncoded());
+            this.writePubRSAIntoResource(publicKey);
+            this.writePriRSAIntoResource(privateKey);
+        } catch (NoSuchAlgorithmException | IOException e) {
+            e.printStackTrace();
+            throw new CommonException("生成公钥私钥的时候出现问题",-1);
+        }
+
     }
 
 
