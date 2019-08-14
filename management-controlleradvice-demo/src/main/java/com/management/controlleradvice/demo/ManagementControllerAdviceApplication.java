@@ -2,6 +2,7 @@ package com.management.controlleradvice.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @Author xiqiuwei
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Modified By:
  */
 @SpringBootApplication
+@EnableDiscoveryClient
 public class ManagementControllerAdviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ManagementControllerAdviceApplication.class,args);

@@ -1,7 +1,6 @@
 server:
   port: 8989
 
-
 # Redis
 spring:
   redis:
@@ -22,4 +21,18 @@ spring:
         # 连接池中的最大空闲连接
         max-idle: 500
         # 连接池中的最小空闲连接
-        min-idle: 0
+       min-idle: 0
+  application:
+    name: auth_center
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    # 是否将Eureka服务端进行注册
+    register-with-eureka: false
+    # 是否检测其他服务将自己的服务注册到其他的Eureka上面
+    fetch-registry: false
+    # 集群的三个节点
+    service-url:
+      defaultZone: http://eureka1.xiqiuwei.com:10010/eureka,http://eureka2.xiqiuwei.com:10011/eureka,http://eureka3.xiqiuwei.com:10012/eureka

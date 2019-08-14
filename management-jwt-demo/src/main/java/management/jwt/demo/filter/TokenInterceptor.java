@@ -1,3 +1,4 @@
+/*
 package management.jwt.demo.filter;
 
 import cn.hutool.core.util.StrUtil;
@@ -12,13 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-
+@SuppressWarnings("all")
+*/
 /**
  * @Author xiqiuwei
  * @Date Created in 13:36 2019/8/13
- * @Description 对请求进行拦截，判断token是否有效
+ * @Description 对请求进行拦截，判断token是否有效,有了springcloud的zuulFilter所以就放弃了拦截器
  * @Modified By:
- */
+ *//*
+
 
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 
@@ -47,13 +50,15 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     }
 
 
-    /**
+    */
+/**
      * @return void
      * @Author xiqiuwei
      * @Date 16:01  2019/8/13
      * @Param [response, errorCode]
      * @Description 返回自定义错误信息
-     */
+     *//*
+
     private void render(HttpServletResponse response, ErrorCode errorCode) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         response.setContentType("application/json;charset=UTF-8");
@@ -64,3 +69,4 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         out.close();
     }
 }
+*/
