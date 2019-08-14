@@ -2,74 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="935c35a2-c57b-461c-9ec6-24e7574a1d22" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_javanica_1_5_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_metrics_event_stream_1_5_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_serialization_1_5_12.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_zuul_zuul_core_1_3_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_io_commons_io_2_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_reactivex_rxjava_reactive_streams_1_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_archaius_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_core_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_eureka_client_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_eureka_server_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_ribbon_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_zuul_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_archaius_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_eureka_server_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_hystrix_2_0_0_RC2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_zuul_2_0_4_BUILD_SNAPSHOT.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/FilterProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/MyFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/management.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_xml_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_xml_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_jaxb_annotations_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_9_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_afterburner_2_9_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_eureka_eureka_client_1_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_eureka_eureka_client_1_9_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_eureka_eureka_core_1_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_eureka_eureka_core_1_9_0.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_core_1_5_18.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_core_1_5_12.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_60.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_56.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_60.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_56.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_commons_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_commons_2_0_0_RC2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_context_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_context_2_0_0_RC2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_archaius_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_core_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_eureka_client_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_eureka_server_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_ribbon_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_ribbon_2_0_0_RC2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_archaius_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_eureka_server_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_ribbon_2_0_4_BUILD_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_zuul_unknown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_2_0_0_RC2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_rsa_1_0_7_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_rsa_1_0_5_RELEASE.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-controlleradvice-demo/management-controlleradvice-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-controlleradvice-demo/management-controlleradvice-demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-controlleradvice-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management-controlleradvice-demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-controlleradvice-demo/src/main/java/com/management/controlleradvice/demo/ManagementControllerAdviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/management-controlleradvice-demo/src/main/java/com/management/controlleradvice/demo/ManagementControllerAdviceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-controlleradvice-demo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/management-controlleradvice-demo/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-eureka-cluster-one/management-eureka-cluster-one.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-eureka-cluster-one/management-eureka-cluster-one.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-eureka-cluster-three/management-eureka-cluster-three.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-eureka-cluster-three/management-eureka-cluster-three.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-eureka-cluster-two/management-eureka-cluster-two.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-eureka-cluster-two/management-eureka-cluster-two.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/management-jwt-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/management-jwt-demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/ManagementJwtDemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/ManagementJwtDemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/MvcConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/MvcConfigurer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/TokenInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/TokenInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-jwt-demo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-rabbitmq-demo/management-rabbitmq-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-rabbitmq-demo/management-rabbitmq-demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-redis-demo/management-redis-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-redis-demo/management-redis-demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-warehouse-core/management-warehouse-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-warehouse-core/management-warehouse-core.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-warehouse-web/management-warehouse-web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-warehouse-web/management-warehouse-web.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-zuul-demo/management-zuul-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/management-zuul-demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/ManagementJwtDemoApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/ManagementJwtDemoApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/filter/JwtFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/filter/MvcConfigurer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/filter/TokenInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/gettoken/JwtUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/gettoken/JwtUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/gettoken/RSAUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/management-jwt-demo/target/classes/management/jwt/demo/gettoken/RSAUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/management-zuul-demo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/ManagementZuulDemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/ManagementZuulDemoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/management-zuul-demo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-zuul-demo/target/classes/management/zuul/demo/filter/FilterProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/target/classes/management/zuul/demo/filter/FilterProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/management-zuul-demo/target/classes/management/zuul/demo/filter/MyFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/management-zuul-demo/target/classes/management/zuul/demo/filter/MyFilter.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/management-rabbitmq-demo/target/" />
     <ignored path="$PROJECT_DIR$/management-warehouse-web/target/" />
@@ -95,62 +38,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/gettoken/JwtUtils.java">
+        <entry file="file://$PROJECT_DIR$/management-zuul-demo/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1400">
-              <caret line="79" column="31" lean-forward="true" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="306">
+              <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/MyFilter.java">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1876">
-              <caret line="88" column="31" lean-forward="true" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#678#702#0" expanded="true" />
-                <element signature="e#506#507#0" expanded="true" />
-                <element signature="e#530#531#0" expanded="true" />
-                <element signature="e#579#580#0" expanded="true" />
-                <element signature="e#603#604#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/ManagementZuulDemoApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#440#441#0" expanded="true" />
-                <element signature="e#520#521#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/MvcConfigurer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" selection-end-line="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/TokenInterceptor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="1" selection-end-line="72" />
+            <state relative-caret-position="226">
+              <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -221,12 +121,12 @@
         <option value="$PROJECT_DIR$/management-jwt-demo/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/management-zuul-demo/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/FilterProperties.java" />
-        <option value="$PROJECT_DIR$/management-zuul-demo/pom.xml" />
         <option value="$PROJECT_DIR$/management-jwt-demo/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/MyFilter.java" />
         <option value="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/TokenInterceptor.java" />
         <option value="$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/filter/MvcConfigurer.java" />
+        <option value="$PROJECT_DIR$/management-zuul-demo/pom.xml" />
       </list>
     </option>
   </component>
@@ -281,62 +181,6 @@
             <path>
               <item name="management" type="b2602c69:ProjectViewProjectNode" />
               <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="jwt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="management-jwt-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
-              <item name="jwt" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="management" type="b2602c69:ProjectViewProjectNode" />
-              <item name="management" type="462c0819:PsiDirectoryNode" />
               <item name="management-warehouse-core" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -365,7 +209,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565780901738" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1565787675359" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -407,7 +251,7 @@
         </RuleState>
       </list>
     </option>
-    <option name="contentProportion" value="0.22199453" />
+    <option name="contentProportion" value="0.3101093" />
   </component>
   <component name="RunManager" selected="Spring Boot.ManagementZuulDemoApplication">
     <configuration name="FilterProperties" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -554,12 +398,12 @@
       <workItem from="1565576760404" duration="17978000" />
       <workItem from="1565656861903" duration="24278000" />
       <workItem from="1565743515260" duration="4460000" />
-      <workItem from="1565751617853" duration="19809000" />
+      <workItem from="1565751617853" duration="21172000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="134318000" />
+    <option name="totallyTimeSpent" value="135681000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -574,7 +418,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22587131" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24865952" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -582,10 +426,10 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Run Dashboard" order="0" sideWeight="0.49932975" weight="0.24362606" />
+      <window_info anchor="bottom" id="Run Dashboard" order="0" sideWeight="0.49932975" visible="true" weight="0.5311615" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49932975" visible="true" weight="0.21954674" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49932975" weight="0.21954674" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -945,13 +789,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/management-zuul-demo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/SaasShipperApplication.http">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -962,24 +799,10 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/ServerApplication.http">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/management-jwt-demo/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-125">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/management-eureka-cluster-one/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1012,7 +835,7 @@
     <entry file="file://$PROJECT_DIR$/management-jwt-demo/src/main/java/management/jwt/demo/gettoken/JwtUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1400">
-          <caret line="79" column="31" lean-forward="true" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
+          <caret line="79" column="31" selection-start-line="79" selection-start-column="31" selection-end-line="79" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1021,8 +844,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/management-zuul-demo/src/main/java/management/zuul/demo/filter/MyFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1876">
-          <caret line="88" column="31" lean-forward="true" selection-start-line="88" selection-start-column="31" selection-end-line="88" selection-end-column="31" />
+        <state relative-caret-position="1076">
+          <caret line="83" column="51" selection-start-line="83" selection-start-column="51" selection-end-line="83" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#678#702#0" expanded="true" />
@@ -1031,6 +854,27 @@
             <element signature="e#579#580#0" expanded="true" />
             <element signature="e#603#604#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management-jwt-demo/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-575">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/management-zuul-demo/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="47" column="30" selection-start-line="47" selection-start-column="30" selection-end-line="47" selection-end-column="30" />
         </state>
       </provider>
     </entry>

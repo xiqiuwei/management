@@ -29,7 +29,7 @@
         <dependency>
             <groupId>com.kangchao</groupId>
             <artifactId>management-jwt-demo</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${management.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
