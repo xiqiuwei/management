@@ -64,7 +64,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kangchao</groupId>
+            <artifactId>management-auth-common</artifactId>
+            <version>${management.version}</version>
         </dependency>
     </dependencies>
 

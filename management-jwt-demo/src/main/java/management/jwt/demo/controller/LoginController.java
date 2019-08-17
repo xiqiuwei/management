@@ -1,17 +1,14 @@
 package management.jwt.demo.controller;
 
+import management.auth.common.gettoken.JwtUtils;
 import management.jwt.demo.entity.ResponseEntity;
 import management.jwt.demo.entity.User;
-import management.jwt.demo.gettoken.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Author xiqiuwei
@@ -23,9 +20,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("/getToken")
     public ResponseEntity<String> getToken (@RequestBody User user) throws Exception {

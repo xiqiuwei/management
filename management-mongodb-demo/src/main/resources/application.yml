@@ -1,0 +1,19 @@
+server:
+  port: 8891
+
+spring:
+  application:
+    name: mongodb_server
+  mongodb:
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    # 集群的三个节点
+    service-url:
+      defaultZone: http://eureka1.xiqiuwei.com:10010/eureka,http://eureka2.xiqiuwei.com:10011/eureka,http://eureka3.xiqiuwei.com:10012/eureka
+
+feign:
+  hystrix:
+    enabled: true #开启Feign Hystrix 支持

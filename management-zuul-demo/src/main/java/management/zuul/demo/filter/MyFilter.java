@@ -1,12 +1,13 @@
 package management.zuul.demo.filter;
 
-import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import management.jwt.demo.entity.ErrorCode;
-import management.jwt.demo.gettoken.JwtUtils;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
+import management.auth.common.gettoken.JwtUtils;
+import management.auth.common.entity.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
 @SuppressWarnings("ALL")
 /**
  * @Author xiqiuwei
@@ -25,6 +27,7 @@ import java.util.List;
  * @Description
  * @Modified By:
  */
+@Slf4j
 @Component
 @EnableConfigurationProperties(FilterProperties.class)
 public class MyFilter extends ZuulFilter {
@@ -77,28 +80,27 @@ public class MyFilter extends ZuulFilter {
         // 每次请求头部token都会放在Authorization:Bearer+空格(JWT定义的规范,可以解决cors)
         String authorization = request.getHeader("Authorization");
         try {
-            if (StrUtil.isBlank(authorization)) {
+            if (authorization == null) {
                 render(response, ErrorCode.AuthorizationEmpty);
-            }
-            if (!authorization.startsWith("Bearer ")) {
-                render(response, ErrorCode.Bearer);
             }
             final String token = authorization.substring(7);
             // 解析token将载荷信息存放到本地线程
             new JwtUtils().parseToken(token);
-        } catch (Exception e) {
-            response.setContentType("application/json;charset=UTF-8");
+        } catch (ExpiredJwtException e) {
             try {
-                response.getWriter().write(HttpStatus.UNAUTHORIZED.value());
+                currentContext.setSendZuulResponse(false);
+                currentContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+                render(response, ErrorCode.TokenExpiration);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private boolean isAllowUri (String uri) {
+    private boolean isAllowUri(String uri) {
         boolean flag = true;
         List<String> allowPaths = filterProperties.getAllowPaths();
         for (String allowPath : allowPaths) {

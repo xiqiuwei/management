@@ -23,8 +23,10 @@ public class MyAdvice {
         Map map = new HashMap();
         map.put("错误代码", 500);
         if (e instanceof MyException) {
+            e.printStackTrace();
             map.put("这是错误的异常信息", e.getMessage());
         } else if (e instanceof Exception) {
+            e.printStackTrace();
             map.put("这是人们从未发现的错误", e.getMessage());
         }
         return map;

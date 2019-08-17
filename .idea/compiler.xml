@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-server-one" />
+        <module name="management-auth-common" />
         <module name="management-controlleradvice-demo" />
         <module name="management-eureka-cluster-one" />
         <module name="management-eureka-cluster-three" />
         <module name="management-eureka-cluster-two" />
         <module name="management-jwt-demo" />
+        <module name="management-mongodb-demo" />
         <module name="management-rabbitmq-demo" />
         <module name="management-redis-demo" />
         <module name="management-warehouse-core" />
@@ -24,12 +26,14 @@
       <module name="eureka-server-three" target="1.8" />
       <module name="eureka-server-two" target="1.8" />
       <module name="management" target="1.8" />
+      <module name="management-auth-common" target="1.8" />
       <module name="management-controlleradvice-demo" target="1.8" />
       <module name="management-eureka-cluster-one" target="1.8" />
       <module name="management-eureka-cluster-three" target="1.8" />
       <module name="management-eureka-cluster-two" target="1.8" />
       <module name="management-eureka-demo" target="1.8" />
       <module name="management-jwt-demo" target="1.8" />
+      <module name="management-mongodb-demo" target="1.8" />
       <module name="management-rabbitmq-demo" target="1.8" />
       <module name="management-redis-demo" target="1.8" />
       <module name="management-warehouse-core" target="1.8" />
@@ -43,12 +47,14 @@
       <module name="eureka-server-one" options="-parameters" />
       <module name="eureka-server-three" options="-parameters" />
       <module name="eureka-server-two" options="-parameters" />
+      <module name="management-auth-common" options="-parameters" />
       <module name="management-controlleradvice-demo" options="-parameters" />
       <module name="management-eureka-cluster-one" options="-parameters" />
       <module name="management-eureka-cluster-three" options="-parameters" />
       <module name="management-eureka-cluster-two" options="-parameters" />
       <module name="management-eureka-demo" options="-parameters" />
       <module name="management-jwt-demo" options="-parameters" />
+      <module name="management-mongodb-demo" options="-parameters" />
       <module name="management-rabbitmq-demo" options="-parameters" />
       <module name="management-redis-demo" options="-parameters" />
       <module name="management-warehouse-core" options="-parameters" />

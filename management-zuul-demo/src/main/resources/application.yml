@@ -1,38 +1,47 @@
 server:
-  port: 8000
+  port: 80
 
 spring:
   application:
     name: zuul_server
 
 eureka:
-  instance:
-    instance-id: ${spring.application.name}:${server.port}
   client:
-    # 是否将Eureka服务端进行注册
-    register-with-eureka: false
-    # 是否检测其他服务将自己的服务注册到其他的Eureka上面
-    fetch-registry: false
     # 集群的三个节点
     service-url:
       defaultZone: http://eureka1.xiqiuwei.com:10010/eureka,http://eureka2.xiqiuwei.com:10011/eureka,http://eureka3.xiqiuwei.com:10012/eureka
 zuul:
-  prefix: /api # 全局前缀
-  retryable: true
+ # prefix: /api # 全局前缀
+ # retryable: true
   routes:
     hello_world: /hello/** # 将微服务模块映射到/hello/**下面
     advice_server: /advice/**
-    auth_center: /auth/**
-  ignored-services:
-    - rabbitmq_server # 忽略当前这个服务，不暴露出去
+    auth_center: /auth/** # 鉴权中心
+  ignored-services: "*" # 忽略所有的服务
   add-host-header: true # 此处解决后端服务重定向导致用户浏览的host变成 后端服务的host的问题
   # 不忽略任何头部信息，所有header都转发到下游的资源服务器
-  sensitive-headers:
+  sensitive-headers: # 接收header信息
 
-# 白名单
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6100 # 线程超时,调用Fallback方法
+    circuitBreaker:
+      requestVolumeThreshold: 3  # 10秒内出现3个以上请求(已临近阀值),并且出错率在50%以上,开启断路器.断开服务,调用Fallback方法
+
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 2000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: false # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+
+# 白名单,不需要走zuulFilter
 whitelist:
   allowPaths:
-    - /api/advice
-    - /api/auth
+    - /auth
 
 

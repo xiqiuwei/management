@@ -30,7 +30,12 @@
         <module>management-redis-demo</module>
         <!--jwt登录校验-->
         <module>management-jwt-demo</module>
+        <!--zuul网关-->
         <module>management-zuul-demo</module>
+        <!--鉴权重新公共类-->
+        <module>management-auth-common</module>
+        <!--非关系型数据库mongodb-->
+        <module>management-mongodb-demo</module>
     </modules>
 
     <properties>
