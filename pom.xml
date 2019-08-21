@@ -44,7 +44,7 @@
         <mybatis.plus.boot.starter.version>3.0.1</mybatis.plus.boot.starter.version>
         <hutool.version>4.5.10</hutool.version>
         <druid.version>1.1.10</druid.version>
-        <amqp.rabbit>2.0.1.RELEASE</amqp.rabbit>
+        <amqp.rabbit>2.1.4.RELEASE</amqp.rabbit>
         <jedis.version>2.9.0</jedis.version>
         <redis.version>2.1.5.RELEASE</redis.version>
         <json.jackson>2.9.3</json.jackson>

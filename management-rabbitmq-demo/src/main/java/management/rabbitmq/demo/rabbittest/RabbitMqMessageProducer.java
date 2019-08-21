@@ -1,8 +1,8 @@
 package management.rabbitmq.demo.rabbittest;
 
 import org.springframework.amqp.core.MessageDeliveryMode;
-import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class RabbitMqMessageProducer extends MessageProducer {
      * @Description 普通消息发送
      */
     @Override
-    public MessageResponse send(String exchange, String routingKey, Object message,CorrelationData correlationData) {
+    public MessageResponse send(String exchange, String routingKey, Object message, CorrelationData correlationData) {
         MessageResponse messageResponse = new MessageResponse();
         try {
             rabbitTemplate.convertAndSend(exchange, routingKey,message,correlationData);

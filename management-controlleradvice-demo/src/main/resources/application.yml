@@ -13,7 +13,7 @@ spring:
     prefix: classpath:/templates/views/ # 设置前缀
     check-template-location: true # 检查模板位置是否存在
   application:
-    name: advice_server
+    name: advice-server
 
 eureka:
   instance:

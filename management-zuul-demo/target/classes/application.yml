@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: zuul_server
+    name: zuul-server
 
 eureka:
   client:
@@ -14,16 +14,33 @@ zuul:
  # prefix: /api # 全局前缀
  # retryable: true
   routes:
-    hello_world: /hello/** # 将微服务模块映射到/hello/**下面
-    advice_server: /advice/**
-    auth_center: /auth/** # 鉴权中心
+    hello-world: /hello/** # 将微服务模块映射到/hello/**下面
+    advice-server: /advice/**
+    auth-center: /auth/** # 鉴权中心
+    mongodb-server: /mongo/** # mongodb
   ignored-services: "*" # 忽略所有的服务
   add-host-header: true # 此处解决后端服务重定向导致用户浏览的host变成 后端服务的host的问题
   # 不忽略任何头部信息，所有header都转发到下游的资源服务器
   sensitive-headers: # 接收header信息
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6100 # 线程超时,调用Fallback方法
+    circuitBreaker:
+      requestVolumeThreshold: 3  # 10秒内出现3个以上请求(已临近阀值),并且出错率在50%以上,开启断路器.断开服务,调用Fallback方法
 
-# 白名单
+ribbon:
+  ConnectTimeout: 250 # 连接超时时间(ms)
+  ReadTimeout: 2000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: false # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+
+# 白名单,不需要走zuulFilter
 whitelist:
   allowPaths:
     - /auth

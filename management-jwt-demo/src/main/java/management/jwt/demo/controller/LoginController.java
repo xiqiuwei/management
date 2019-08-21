@@ -3,8 +3,6 @@ package management.jwt.demo.controller;
 import management.auth.common.gettoken.JwtUtils;
 import management.jwt.demo.entity.ResponseEntity;
 import management.jwt.demo.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

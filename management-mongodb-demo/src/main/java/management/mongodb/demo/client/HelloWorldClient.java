@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Modified By:
  */
 @Component
-@FeignClient(name = "advice_server",fallback = HelloWorldFallBack.class)
+@FeignClient(serviceId = "advice-server",fallback = HelloWorldFallBack.class)
 public interface HelloWorldClient {
 
     @GetMapping("/getString")

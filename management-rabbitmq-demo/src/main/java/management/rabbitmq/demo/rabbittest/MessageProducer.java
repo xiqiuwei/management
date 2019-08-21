@@ -1,7 +1,7 @@
 package management.rabbitmq.demo.rabbittest;
 
 
-import org.springframework.amqp.rabbit.connection.CorrelationData;
+import org.springframework.amqp.rabbit.support.CorrelationData;
 
 /**
  * @Author xiqiuwei

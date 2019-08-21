@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: zuul_server
+    name: zuul-server
 
 eureka:
   client:
@@ -14,9 +14,10 @@ zuul:
  # prefix: /api # 全局前缀
  # retryable: true
   routes:
-    hello_world: /hello/** # 将微服务模块映射到/hello/**下面
-    advice_server: /advice/**
-    auth_center: /auth/** # 鉴权中心
+    hello-world: /hello/** # 将微服务模块映射到/hello/**下面
+    advice-server: /advice/**
+    auth-center: /auth/** # 鉴权中心
+    mongodb-server: /mongo/** # mongodb
   ignored-services: "*" # 忽略所有的服务
   add-host-header: true # 此处解决后端服务重定向导致用户浏览的host变成 后端服务的host的问题
   # 不忽略任何头部信息，所有header都转发到下游的资源服务器

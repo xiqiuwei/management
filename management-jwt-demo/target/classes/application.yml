@@ -1,10 +1,10 @@
 server:
-  port: 8989
+  port: 8889
 
 # Redis
 spring:
   application:
-    name: auth_center
+    name: auth-center
   redis:
     database: 0
     timeout: 5000

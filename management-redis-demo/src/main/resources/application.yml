@@ -7,7 +7,7 @@ server:
 spring:
   ### 服务名称
   application:
-    name: redis_server
+    name: redis-server
   ### redis配置
   redis:
     # Redis数据库索引（默认为0）
