@@ -36,6 +36,7 @@
         <module>management-auth-common</module>
         <!--非关系型数据库mongodb-->
         <module>management-mongodb-demo</module>
+        <module>management-elasticsearch-demo</module>
     </modules>
 
     <properties>

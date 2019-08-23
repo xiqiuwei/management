@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/management.iml" filepath="$PROJECT_DIR$/management.iml" />
       <module fileurl="file://$PROJECT_DIR$/management-auth-common/management-auth-common.iml" filepath="$PROJECT_DIR$/management-auth-common/management-auth-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/management-controlleradvice-demo/management-controlleradvice-demo.iml" filepath="$PROJECT_DIR$/management-controlleradvice-demo/management-controlleradvice-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/management-elasticsearch-demo/management-elasticsearch-demo.iml" filepath="$PROJECT_DIR$/management-elasticsearch-demo/management-elasticsearch-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/management-eureka-cluster-one/management-eureka-cluster-one.iml" filepath="$PROJECT_DIR$/management-eureka-cluster-one/management-eureka-cluster-one.iml" />
       <module fileurl="file://$PROJECT_DIR$/management-eureka-cluster-three/management-eureka-cluster-three.iml" filepath="$PROJECT_DIR$/management-eureka-cluster-three/management-eureka-cluster-three.iml" />
       <module fileurl="file://$PROJECT_DIR$/management-eureka-cluster-two/management-eureka-cluster-two.iml" filepath="$PROJECT_DIR$/management-eureka-cluster-two/management-eureka-cluster-two.iml" />

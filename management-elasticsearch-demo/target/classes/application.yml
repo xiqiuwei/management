@@ -1,0 +1,11 @@
+server:
+  port: 8892
+spring:
+  application:
+    name: elasticsearch-server
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 192.168.80.128:9300 #节点的地址 java客户端的端口号是9300
+      cluster-name: elastic-nodeone

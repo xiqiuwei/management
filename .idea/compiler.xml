@@ -9,6 +9,7 @@
         <module name="eureka-server-one" />
         <module name="management-auth-common" />
         <module name="management-controlleradvice-demo" />
+        <module name="management-elasticsearch-demo" />
         <module name="management-eureka-cluster-one" />
         <module name="management-eureka-cluster-three" />
         <module name="management-eureka-cluster-two" />
@@ -28,6 +29,7 @@
       <module name="management" target="1.8" />
       <module name="management-auth-common" target="1.8" />
       <module name="management-controlleradvice-demo" target="1.8" />
+      <module name="management-elasticsearch-demo" target="1.8" />
       <module name="management-eureka-cluster-one" target="1.8" />
       <module name="management-eureka-cluster-three" target="1.8" />
       <module name="management-eureka-cluster-two" target="1.8" />
@@ -49,6 +51,7 @@
       <module name="eureka-server-two" options="-parameters" />
       <module name="management-auth-common" options="-parameters" />
       <module name="management-controlleradvice-demo" options="-parameters" />
+      <module name="management-elasticsearch-demo" options="-parameters" />
       <module name="management-eureka-cluster-one" options="-parameters" />
       <module name="management-eureka-cluster-three" options="-parameters" />
       <module name="management-eureka-cluster-two" options="-parameters" />
