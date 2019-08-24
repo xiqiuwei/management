@@ -1,5 +1,5 @@
 server:
-  port: 8988
+  port: 8890
   tomcat:
     uri-encoding: UTF-8
 
@@ -13,7 +13,7 @@ spring:
     prefix: classpath:/templates/views/ # 设置前缀
     check-template-location: true # 检查模板位置是否存在
   application:
-    name: advice_server
+    name: advice-server
 
 eureka:
   instance:
@@ -22,3 +22,5 @@ eureka:
     # 集群的三个节点
     service-url:
       defaultZone: http://eureka1.xiqiuwei.com:10010/eureka,http://eureka2.xiqiuwei.com:10011/eureka,http://eureka3.xiqiuwei.com:10012/eureka
+
+

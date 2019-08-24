@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Modified By:
  */
 @Component
-@FeignClient(serviceId = "advice-server",fallback = HelloWorldFallBack.class)
+@FeignClient("advice-server")
 public interface HelloWorldClient {
 
-    @GetMapping("/getString")
-    ResponseEntity<Student> getHelloWorld (@RequestParam("id")String id);
+    @GetMapping("/helloWorld/getString")
+    ResponseEntity<Student> getHelloWorld (@RequestParam("id") String id);
 
 }

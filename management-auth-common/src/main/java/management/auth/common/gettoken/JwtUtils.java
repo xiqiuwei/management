@@ -45,7 +45,7 @@ public class JwtUtils {
         // 用户名和密码是数据库里面的数据
         // 可以将生成的token放到缓存中加TTL，当用户每次请求接口时刷新token的TTL
         long currentTime = System.currentTimeMillis();
-        long expiration = 600000L;
+        long expiration = 6000000L;
         String token = Jwts.builder()
                 .signWith(SignatureAlgorithm.RS256, privateKey)
                 .claim("userName", userName) // 数据库当中的用户信息

@@ -1,0 +1,17 @@
+1.首先对于elasticsearch的实体类@Document注解介绍起，@Document里面有几个参数
+    1.indexName：这个就好比是数据库中的库
+    2.type：这个就好比是数据库中的表
+    3.document：这就就好比数据库中的行，一个文本对象，与mongodb一样属于document对象
+    4.shards：分区，默认5个分区
+    5.replicas：每个分区的备份数量，默认是1个
+    6.refreshInterval：elasticsearch的刷新间隔，默认是1s
+    7.indexStoreType：索引文件的存储类型，默认是"fs"
+2.@Id注解，这个就相当于elasticsearch里面的主键
+3.@Field注解，里面的参数介绍
+    1.type：FieldType.Auto自动检索属性的类型，当然也有Integer，Long....等类型可以定义
+    2.index：FieldIndex.analyzed默认的情况下面是分词的
+    3.format：默认DateFormat.none可以自定义日期的格式
+    4.store：默认情况下面是不储存原文的
+    5.searchAnalyzer：指定字段搜索时使用的分词器
+    6.indexAnalyzer：指定字段建立索引时指定的分词器
+    7.ignoreFields：忽略某个字段

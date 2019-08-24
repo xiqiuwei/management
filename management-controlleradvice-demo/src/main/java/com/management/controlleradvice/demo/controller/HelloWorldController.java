@@ -26,7 +26,7 @@ public class HelloWorldController {
     private IHelloWorldService helloWorldService;
 
     @GetMapping("/getString")
-    public ResponseEntity<Student> getHelloWorld (@RequestParam("id")String id) {
+    public ResponseEntity<Student> getHelloWorld ( String id) {
         Student student = helloWorldService.getDescriptionById(id);
         return ResponseEntity.success(student);
     }

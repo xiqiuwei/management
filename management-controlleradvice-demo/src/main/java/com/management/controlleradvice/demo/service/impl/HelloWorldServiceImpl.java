@@ -18,8 +18,8 @@ public class HelloWorldServiceImpl implements IHelloWorldService {
     @Override
     public Student getDescriptionById(String id) {
         Student student = new Student();
-        student.setName("这是经过鉴权中心校验后得到的有效token解析的数据:"+ MyInterceptor.getLoginUser().getUserName());
-        student.setPassword("这是经过鉴权中心校验后得到的有效token解析的数据:"+MyInterceptor.getLoginUser().getPassword());
+//        student.setName("这是经过鉴权中心校验后得到的有效token解析的数据:"+ MyInterceptor.getLoginUser().getUserName());
+       // student.setPassword("这是经过鉴权中心校验后得到的有效token解析的数据:"+MyInterceptor.getLoginUser().getPassword());
         if (id.equals("1")) {
             student.setMessage("三土打篮球像菜虚困一样美");
             return student;
