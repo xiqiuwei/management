@@ -15,3 +15,7 @@
     5.searchAnalyzer：指定字段搜索时使用的分词器
     6.indexAnalyzer：指定字段建立索引时指定的分词器
     7.ignoreFields：忽略某个字段
+4.下面举点常用api的例子：
+    1.QueryBuilders.boolQuery().must();单个或者多个条件必须全部符合，相当于sql语句的and
+    2.QueryBuilders.boolQuery().mustNot();单个或者多个条件必须都不符合，相当于sql语句的not
+    3.QueryBuilders.boolQuery().should();单个或者多个符合起重一个，相当于sql语句的or

@@ -1,0 +1,55 @@
+rpm下载erlang
+1.https://www.erlang-solutions.com/resources/download.html
+// 启动EPEL源
+2.sudo yum install epel-release 
+// 安装erlang
+3.sudo yum install erlang 
+rpm下载rabbitMQ
+1.https://www.rabbitmq.com/download.html
+// 安装rabbitMQ
+2.sudo yum install rabbitmq-server-3.7.16-1.el7.noarch.rpm
+// 如果遇到了安装时候的错误
+3.Error: Package: socat-1.7.2.3-1.el6.x86_64 (epel)
+       Requires: libreadline.so.5()(64bit)
+解决方法 sudo yum install socat
+
+
+rabbitMQ的配置操作命令
+1.开机自动启动: sudo systemctl enable rabbitmq-server.service（centos7）chkconfig rabbitmq-server on（centos6）
+2.启动服务：sudo /sbin/service rabbitmq-server start
+3.查看服务状态：sudo /sbin/service rabbitmq-server status
+4.停止服务：sudo /sbin/service rabbitmq-server stop
+5.查看当前的所有用户：sudo rabbitmqctl list_users
+6.检查rabbitMQ是否启动成功： ps aux|grep rabbitmq
+7.打开端口(程序访问端口5672) 
+/sbin/iptables -I INPUT -p tcp --dport 15672 -j ACCEPT 
+/sbin/iptables -I INPUT -p tcp --dport 5672 -j ACCEPT
+8.开启控制台管理插件 ：rabbitmq-plugins enable rabbitmq_management
+9.打开网页http://192.168.0.199:15672
+这里提一下啊默认的用户名和密码guest在3.3.0以后就禁用了想要用解决方案是：
+（1） 找到/rabbitmq_server-3.6.14/ebin下面的rabbit.app 
+  ebin在哪继续 find / -name "rabbitmq_server-3.7.16"
+  我的是在/usr/lib/rabbitmq/lib/rabbitmq_server-3.7.16
+  vi rabbit.app找到里面的{loopback_users, [<<guest>>]}把中括号里面的内容清除留个中括号就可以
+  service rabbitmq-server restart  对了别忘记restart一下
+10.这里遇到个坑网上都说etc/rabbitmq/rabbitmq.config我没有找到但是解决方案是：(不过这个配置文件要不要无所谓因为用他默认的就可以了)
+（1）find / -name "rabbitmq.config.example" 
+（2）cp /usr/share/doc/rabbitmq-server-3.7.16/rabbitmq.config.example /etc/rabbitmq/ 把包配置文件copy到etc/rabbitmq下面
+（3）mv rabbitmq.config.example rabbitmq.config 改名
+（4）service rabbitmq-server restart 哦对了别忘记restart一下完成
+11.最后说下添加当前账户为管理员账户： rabbitmqctl list_users  ->rabbitmqctl set_user_tags guest administrator
+
+
+rabbitMQ:
+     userName:xiqiuwei
+     password:123456
+
+git：命令
+查看远端有哪些仓库：git remote
+更新远端代码到本地：git fetch upstream
+合并远端的代码到本地master：git merge upstream/master
+删除本地分支：git branch -d '分支名字'
+删除远端的分支：git push --delete '分支名字'
+查看当前分支：git branch -a
+切换分支到master：git checkout master
+修剪远程分支： git fetch -p origin

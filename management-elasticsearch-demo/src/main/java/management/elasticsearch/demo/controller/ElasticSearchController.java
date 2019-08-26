@@ -6,7 +6,9 @@ import management.elasticsearch.demo.entity.UserInfo;
 import management.elasticsearch.demo.repository.ElasticSearchRepository;
 import management.elasticsearch.demo.service.IElasticSearchService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
@@ -108,14 +110,16 @@ public class ElasticSearchController {
      * @Description 根据条件精确匹配
      */
     @GetMapping("queryBook")
-    public ResponseEntity queryUserInfoByBimInfoId(@RequestParam("id") String id,
+    public ResponseEntity<List<Book>> queryUserInfoByBimInfoId(@RequestParam("id") String id,
                                                    @RequestParam("bimInfoId") String bimInfoId,
                                                    @PageableDefault Pageable pageable) {
         try {
             SearchQuery query = new NativeSearchQueryBuilder()
                     .withQuery(queryStringQuery(id))
                     .withQuery(queryStringQuery(bimInfoId))
-                    .withPageable(pageable).build();
+                    .withPageable(pageable)
+                    .withSort(SortBuilders.fieldSort("age").order(SortOrder.DESC))
+                    .build();
             List<Book> bookList = elasticsearchTemplate.queryForList(query, Book.class);
             return ResponseEntity.success(bookList);
         } catch (Exception e) {
@@ -131,12 +135,14 @@ public class ElasticSearchController {
      * @Param [name]
      * @Description 根据关键字模糊匹配到查询的内容
      */
-    @GetMapping("queryFuzzyQuery")
+    @GetMapping("queryUserName")
     public ResponseEntity<List<UserInfo>> queryUserInfoByFuzzyQuery(@RequestParam("name") String name) {
         // 构建查询条件
-        BoolQueryBuilder builder = QueryBuilders.boolQuery();
-        // 模糊查询关键字
-        builder.must(QueryBuilders.matchQuery("userName", name));
+        // BoolQueryBuilder builder = QueryBuilders.boolQuery();
+        // 左右模糊查询
+        QueryBuilder builder = QueryBuilders.queryStringQuery("userName").field(name);
+        // 精确的匹配，采用的是默认的分词器
+        // builder.must(QueryBuilders.matchQuery("userName", name));
         // 构建需要排序的字段
         FieldSortBuilder fieldSortBuilder = SortBuilders.fieldSort("age").order(SortOrder.DESC);
         // 分页查询，一页显示5条数据从第一页开始
@@ -159,15 +165,10 @@ public class ElasticSearchController {
         return ResponseEntity.success(content);
     }
 
-    /**
-     * @return management.elasticsearch.demo.entity.ResponseEntity
-     * @Author xiqiuwei
-     * @Date 19:23  2019/8/23
-     * @Param [userInfo]
-     * @Description
-     */
-    @PostMapping("updata")
-    public ResponseEntity updataUserInfoByWord(@RequestBody UserInfo userInfo) {
+
+    @GetMapping("")
+    public ResponseEntity aggregation () {
         return null;
     }
+
 }
