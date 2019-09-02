@@ -2,13 +2,19 @@ package management.elasticsearch.demo.controller;
 
 import management.elasticsearch.demo.entity.Book;
 import management.elasticsearch.demo.entity.ResponseEntity;
+import management.elasticsearch.demo.entity.Student;
 import management.elasticsearch.demo.entity.UserInfo;
 import management.elasticsearch.demo.repository.ElasticSearchRepository;
+import management.elasticsearch.demo.repository.StudentElasticSearchRepository;
 import management.elasticsearch.demo.service.IElasticSearchService;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.index.query.*;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
@@ -17,13 +23,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.ResultsExtractor;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
@@ -43,6 +53,8 @@ public class ElasticSearchController {
     private ElasticsearchTemplate elasticsearchTemplate;
     @Autowired
     private ElasticSearchRepository elasticSearchRepository;
+    @Autowired
+    private StudentElasticSearchRepository studentElasticSearchRepository;
 
     /**
      * @return management.elasticsearch.demo.entity.ResponseEntity
@@ -66,14 +78,14 @@ public class ElasticSearchController {
      * @return management.elasticsearch.demo.entity.ResponseEntity
      * @Author xiqiuwei
      * @Date 11:26  2019/8/23
-     * @Param [book]
+     * @Param student
      * @Description
      */
-    @PostMapping("saveBookInfo")
-    public ResponseEntity saveBookInfoIntoRepository(@RequestBody Book book) {
+    @PostMapping("saveStudent")
+    public ResponseEntity<Student> saveBookInfoIntoRepository(@RequestBody Student student) {
         try {
-            Book bookInfo = elasticSearchService.saveBookInfo(book);
-            return ResponseEntity.success(bookInfo);
+            Student save = studentElasticSearchRepository.save(student);
+            return ResponseEntity.success(save);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.fail("保存失败");
@@ -165,10 +177,61 @@ public class ElasticSearchController {
         return ResponseEntity.success(content);
     }
 
+    /**
+     *@Author xiqiuwei
+     *@Date 8:44  2019/8/27
+     *@Param [subject]
+     *@return management.elasticsearch.demo.entity.ResponseEntity
+     *@Description 简单的聚合函数，根据学课来归类一类学生
+     */
+    @GetMapping("aggeregation")
+    public ResponseEntity aggregationBySubject () {
+        // 查询当前索引库的所有数据
+        MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+        nativeSearchQueryBuilder
+                .withQuery(matchAllQueryBuilder)
+                // 搜索类型
+                .withSearchType(SearchType.DEFAULT)
+                // 索引库名,就是javaBean的indexName
+                .withIndices("student_info")
+                // 表名，javaBean的type
+                .withTypes("student");
+        // 给聚合函数取名
+        TermsAggregationBuilder aggregation = AggregationBuilders.terms("school_subject").field("name");
+        nativeSearchQueryBuilder.addAggregation(aggregation);
+        NativeSearchQuery build = nativeSearchQueryBuilder.build();
+        // 通过elastic模板的query方法获得聚合
+        Aggregations aggregations = elasticsearchTemplate.query(build, new ResultsExtractor<Aggregations>() {
+            @Override
+            public Aggregations extract(SearchResponse searchResponse) {
+                return searchResponse.getAggregations();
+            }
+        });
+   /*     List<Aggregation> aggregationsList = aggregations.asList();
+        StringTerms stringTerms = (StringTerms) aggregationsList;
+        List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        Iterator<StringTerms.Bucket> iterator = buckets.iterator();
+        List<String> subjectList = new ArrayList<>();
+        while (iterator.hasNext()) {
+            String subject = iterator.next().getKey().toString();
+            subjectList.add(subject);
+        }*/
+        Map<String, Aggregation> stringAggregationMap = aggregations.asMap();
+        //获得对应的聚合函数的聚合子类，该聚合子类也是个map集合,里面的value就是桶Bucket，我们要获得Bucket
+        StringTerms stringTerms = (StringTerms) stringAggregationMap.get("name");
+        //获得所有的桶
+        List<StringTerms.Bucket> buckets = stringTerms.getBuckets();
+        //将集合转换成迭代器遍历桶,当然如果你不删除buckets中的元素，直接foreach遍历就可以了
+        Iterator<StringTerms.Bucket> iterator = buckets.iterator();
+        List<String> subjectList = new ArrayList<>();
+        while(iterator.hasNext()) {
+            //bucket桶也是一个map对象，我们取它的key值就可以了
+            String username = iterator.next().getKeyAsString();//或者bucket.getKey().toString();
+            //根据username去结果中查询即可对应的文档，添加存储数据的集合
+            subjectList.add(username);
+        }
 
-    @GetMapping("")
-    public ResponseEntity aggregation () {
-        return null;
+        return ResponseEntity.success(subjectList);
     }
-
 }

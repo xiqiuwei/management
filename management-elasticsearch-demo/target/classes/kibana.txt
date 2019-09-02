@@ -1,0 +1,9 @@
+下载地址：https://www.elastic.co/downloads/past-releases/kibana-6-3-0（和elasticsearch版本一致）
+1.解压kibana的tar包，到安装目录下面的kibana.yml文件下面开放配置如下：
+	（1）server.port: 5601(默认端口)
+	（2）server.host: "0.0.0.0"
+	  (3)  elasticsearch.url: http://192.168.80.128:9200(这是配的es的url)
+	  (4)  kibana.index: ".kibana"
+2.后台启动kibana到bin目录下面./kibana &
+3.fuser -n tcp 5601这是查看kibana的进程的，因为你通过ps -xu|grep kibana是查不到进程号的
+curl http://192.168.80.128:9200 可以查看es的运行状态

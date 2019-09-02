@@ -83,9 +83,9 @@ public class MyFilter extends ZuulFilter {
             if (authorization == null) {
                 render(response, ErrorCode.AuthorizationEmpty);
             }
-            final String token = authorization.substring(7);
+      /*      final String token = authorization.substring(7);
             // 解析token将载荷信息存放到本地线程
-            new JwtUtils().parseToken(token);
+            new JwtUtils().parseToken(token);*/
         } catch (ExpiredJwtException e) {
             try {
                 currentContext.setSendZuulResponse(false);
