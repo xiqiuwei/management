@@ -27,17 +27,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.github.openfeign.form/feign-form -->
-        <dependency>
-            <groupId>io.github.openfeign.form</groupId>
-            <artifactId>feign-form-spring</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.openfeign.from</groupId>
-            <artifactId>feign-from</artifactId>
-            <version>3.2.2</version>
-        </dependency>
         <!--注册中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
