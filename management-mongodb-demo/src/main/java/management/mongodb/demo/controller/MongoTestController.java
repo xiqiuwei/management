@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,14 +31,20 @@ public class MongoTestController {
     public ResponseEntity<String> insertStudentInMongoDB(@RequestBody Student student) {
         // mongo的insert方法是如果存在相同id了抛异常DuplicateKeyException
         // mongo的save是如果存在就更新，不存在就新增
-        List<Student> objects = new ArrayList<>();
-        objects.add(student);
-        long l = System.currentTimeMillis();
-        //mongoTemplate.insert(student);
-        mongoTemplate.insert(objects,Student.class);
-        long l1 = System.currentTimeMillis() - l;
-        System.out.println(l1);
+        try {
+            List<Student> objects = new ArrayList<>();
+            objects.add(student);
+            long l = System.currentTimeMillis();
+            //mongoTemplate.insert(student);
+            mongoTemplate.insert(objects,Student.class);
+            long l1 = System.currentTimeMillis() - l;
+            System.out.println(l1);
             return ResponseEntity.success("SUCCESS");
+        } catch (Exception e) {
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return ResponseEntity.fail("ERROR");
     }
 
     @Transactional

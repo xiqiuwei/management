@@ -1,0 +1,6 @@
+management\auth\common\gettoken\RSAUtils.class
+management\auth\common\entity\ErrorCode.class
+management\auth\common\exception\CommonException.class
+management\auth\common\gettoken\JwtUtils.class
+management\auth\common\entity\User.class
+management\auth\common\entity\UserThreadLocal.class

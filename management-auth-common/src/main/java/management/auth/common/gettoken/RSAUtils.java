@@ -199,6 +199,7 @@ public class RSAUtils {
 
 
     public static void main(String[] args) throws Exception {
+        // MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCCNawwas7ilrmbQRQlQQIGc8oBdMdHxXqWCP8yU6WJplKGCpmvnL3px9LGBYeN3UFRWgRhiBBj8uG3SmrsmuTTklidiAEMkzEpkPivmewCGIFQ9AFMvhaDsHPqxesRzcYUuC4JXU5h5kKkXnGENIDCs3d9F0o
         RSAUtils rsaUtils = new RSAUtils();
         InputStream inputStream = new ClassPathResource("/static/rsa.pub").getInputStream();
         String s = rsaUtils.readFile(inputStream);

@@ -9,6 +9,7 @@
         <module name="eureka-server-one" />
         <module name="management-auth-common" />
         <module name="management-controlleradvice-demo" />
+        <module name="management-current-demo" />
         <module name="management-elasticsearch-demo" />
         <module name="management-eureka-cluster-one" />
         <module name="management-eureka-cluster-three" />
@@ -17,6 +18,7 @@
         <module name="management-mongodb-demo" />
         <module name="management-rabbitmq-demo" />
         <module name="management-redis-demo" />
+        <module name="management-topdf-demo" />
         <module name="management-warehouse-core" />
         <module name="management-warehouse-web" />
         <module name="management-zuul-demo" />
@@ -29,6 +31,7 @@
       <module name="management" target="1.8" />
       <module name="management-auth-common" target="1.8" />
       <module name="management-controlleradvice-demo" target="1.8" />
+      <module name="management-current-demo" target="1.8" />
       <module name="management-elasticsearch-demo" target="1.8" />
       <module name="management-eureka-cluster-one" target="1.8" />
       <module name="management-eureka-cluster-three" target="1.8" />
@@ -38,6 +41,7 @@
       <module name="management-mongodb-demo" target="1.8" />
       <module name="management-rabbitmq-demo" target="1.8" />
       <module name="management-redis-demo" target="1.8" />
+      <module name="management-topdf-demo" target="1.8" />
       <module name="management-warehouse-core" target="1.8" />
       <module name="management-warehouse-web" target="1.8" />
       <module name="management-zuul-demo" target="1.8" />
@@ -51,6 +55,7 @@
       <module name="eureka-server-two" options="-parameters" />
       <module name="management-auth-common" options="-parameters" />
       <module name="management-controlleradvice-demo" options="-parameters" />
+      <module name="management-current-demo" options="-parameters" />
       <module name="management-elasticsearch-demo" options="-parameters" />
       <module name="management-eureka-cluster-one" options="-parameters" />
       <module name="management-eureka-cluster-three" options="-parameters" />
@@ -60,6 +65,7 @@
       <module name="management-mongodb-demo" options="-parameters" />
       <module name="management-rabbitmq-demo" options="-parameters" />
       <module name="management-redis-demo" options="-parameters" />
+      <module name="management-topdf-demo" options="-parameters" />
       <module name="management-warehouse-core" options="-parameters" />
       <module name="management-warehouse-web" options="-parameters" />
       <module name="management-zuul-demo" options="-parameters" />
