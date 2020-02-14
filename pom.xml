@@ -39,8 +39,10 @@
         <module>management-elasticsearch-demo</module>
         <!--pdf模块-->
         <module>management-topdf-demo</module>
-        <!--spring security-->
-        <module>management-spring-security</module>
+        <!--spring 并发包-->
+        <module>management-spring-current</module>
+        <!--shiro安全框架-->
+        <module>management-shiro-demo</module>
     </modules>
 
     <properties>

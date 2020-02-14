@@ -1,0 +1,33 @@
+### server
+server:
+  port: 8889
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  rabbitmq:
+    host: 192.168.0.197
+    port: 5672
+    username: xiqiuwei
+    password: 123456
+    virtual-host: / # rabbit的vhost
+    publisher-confirms: true # 发布确认
+    publisher-returns: true # 发布返回
+    connection-timeout: 3000 # 连接超时，0表示不超时
+    listener:
+      simple:
+        acknowledge-mode: manual # 手动ack
+        max-concurrency: 10 # 最大的消费者数量
+        concurrency: 1 # 最小的消费者数量
+        prefetch: 3 # 指定一个请求能处理多少个消息，如果有事务的画必须大于transaction数量
+        transaction-size: 2 # 指定一个事务能处理的数量，小于等于prefetch数量
+        retry:
+          enabled: true # 开启重试功能
+          max-attempts: 2 # 最大重试数量 2
+          initial-interval: 2000 # 重试的间隔 2000ms
+    template:
+      mandatory: true # 启用强制信息
+      retry:
+        enabled: true # 开启重试功能
+#        max-attempts: 2
+#        initial-interval: 2000

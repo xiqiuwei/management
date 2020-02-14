@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/management-eureka-cluster-three/pom.xml" />
         <option value="$PROJECT_DIR$/management-jwt-demo/pom.xml" />
         <option value="$PROJECT_DIR$/management-zuul-demo/pom.xml" />
+        <option value="$PROJECT_DIR$/management-current-demo/pom.xml" />
       </list>
     </option>
   </component>

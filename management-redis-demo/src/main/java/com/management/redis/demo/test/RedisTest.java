@@ -1,13 +1,12 @@
 package com.management.redis.demo.test;
 
+import com.management.redis.demo.interfaces.RedisLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
@@ -54,4 +53,13 @@ public class RedisTest {
         }
         return "SUCCESS";
     }
+
+
+    @GetMapping("testing")
+    @RedisLock(lockTime = 3000)
+   public String test(HttpServletRequest request) throws InterruptedException {
+        String id = request.getParameter("id");
+        Thread.sleep(10000);
+        return "请求成功";
+   }
 }

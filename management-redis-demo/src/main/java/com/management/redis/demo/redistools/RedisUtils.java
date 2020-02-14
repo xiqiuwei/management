@@ -8,7 +8,7 @@ import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 
-@SuppressWarnings("all")
+
 /**
  * @Author xiqiuwei
  * @Date Created in 15:11 2019/8/1
@@ -78,26 +78,30 @@ public class RedisUtils {
     }
 
     /**
-     * 向redis存入key和value,并释放连接资源
-     * 如果key已经存在 则覆盖
-     *
+     * NX 当key不存在的时候才进行set操作
+     * XX 当key存在的时候才进行set操作
      * @param key
      * @param value
-     * @param indexdb
+     * @param indexDB
      * @return
      */
-    public String set(String key, String value, int indexdb) {
+    public String set(String key, String value, int indexDB, Long expires) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
-            jedis.select(indexdb);
-            return jedis.set(key, value);
+            jedis.select(indexDB);
+            if (jedis.get(key).equals("-1")) {
+                return jedis.set(key, value, "XX", "PX", expires);
+            } else {
+                return jedis.set(key, value, "NX", "PX", expires);
+            }
         } catch (Exception e) {
-            return "0";
+            return "FAILURE";
         } finally {
             returnResource(jedisPool, jedis);
         }
     }
+
 
     /**
      * 向redis存入key和value,并释放连接资源

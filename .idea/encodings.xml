@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-auth-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-controlleradvice-demo" charset="UTF-8" />
@@ -14,11 +14,11 @@
     <file url="file://$PROJECT_DIR$/management-mongodb-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-rabbitmq-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-redis-demo" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/management-redis-demo/src/main/resources/application.yml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/management-shiro-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-topdf-demo" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-warehouse-core" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-warehouse-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/management-zuul-demo" charset="UTF-8" />
-    <file url="PROJECT" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

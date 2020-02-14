@@ -1,0 +1,34 @@
+mongodb下载地址：https://www.mongodb.com/download-center/community?jmp=docs
+1.tar -zxvf mongodb-linux-x86_64-3.0.6.tgz  解压安装包
+2.mv  mongodb-linux-x86_64-4.0.12 /usr/local/mongodb  这一步是将mongodb-linux-x86_64-4.0.12移到usr/local/下面并且改名成mongodb
+3.然后在mongodb下面 mkdir data/db    创建日志 touch logs
+4.到bin目录下面创建一个vi mongod.conf文件，内容为：
+					# 指定db路径
+					dbpath=/usr/local/mongodb/data/db
+					# 指定日志路劲
+					logpath=/usr/local/mongodb/data/logs
+					# 以追加方式写日志
+					logappend=true
+					# 默认端口号
+					port=27017
+					# 守护进程
+					fork=true
+					#允许任何IP进行连接
+					bind_ip=0.0.0.0
+5.环境变量vim /etc/profile
+export MONGODB_HOME=/usr/local/mongodb
+export PATH=$PATH:$MONGODB_HOME/bin
+source /etc/profile
+6.启动mongodb服务命令直接启动配置的mongod.conf文件即可 mongod -config mongod.conf
+7.退出数据库ctrl+c 这种关闭方式会等待当前进行中的的操作完成，所以依然是干净的关闭方式（自己就用这个关闭）
+8.停止mongodb服务 数据库关闭后直接ps -xu|grep mongo  然后kill-9 进程号
+查看端口号：netstat -atnp
+
+集群得配法：配置三个mongod.conf文件在里面加上集群的名字replSet=xxxxx，例如三台机器一定要配三个相同的名字，然后配三个不同的端口号
+然后mongo 192.168.80.128：27017启动一个mongo实例进去后use admin接着输入下面这段配置_id就是conf文件里面配的replSet名一样
+config={_id:"mongoCluster",members:[{_id:0,host:"192.168.80.128:27017"},{_id:1,host:"192.168.80.128:27018"},{_id:2,host:"192.168.80.128:27019"}]}
+然后使用config配置> rs.initiate(config)
+如果要看下配置的集群是否成功的话用rs.status()看下，接着去另外两个slave实例上去查下master上面的数据发现报错没权限查这个时候输入一个命令就可以解决
+了，rs.slaveOk(),这样就可以解决访问不到数据的问题了，当三个实例都测试通了ok说明集群搭建完成！
+9.mongodb在启动的时候需要指定下刚自己配置的config文件./mongod -config mongodb1.conf,这里有个问题，如果mongodb在非正常情况下面
+关闭的话下次启动会报错，解决方法就是去data/db/下面把mongod.lock文件删除就可以了

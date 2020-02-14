@@ -27,8 +27,8 @@ public class RedisConfig {
     @Value("${spring.redis.port}")
     private int port;
 
-    @Value("${spring.redis.password}")
-    private String password;
+//    @Value("${spring.redis.password}")
+//    private String password;
 
     @Value("${spring.redis.timeout}")
     private int timeout;
@@ -52,7 +52,7 @@ public class RedisConfig {
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        return new JedisPool(jedisPoolConfig,host,port,timeout,password);
+        return new JedisPool(jedisPoolConfig,host,port,timeout);
     }
 
     /**
@@ -71,7 +71,6 @@ public class RedisConfig {
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
-
         // 设置value的序列化规则和 key的序列化规则
         redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
