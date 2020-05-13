@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: flowable-ui-modeler-app
+Implementation-Version: 6.4.0
+Archiver-Version: Plexus Archiver
+Built-By: tijsrademakers
+Implementation-Vendor-Id: org.flowable
+Spring-Boot-Version: 2.0.5.RELEASE
+Implementation-Vendor: Flowable
+Main-Class: org.springframework.boot.loader.WarLauncher
+Start-Class: org.flowable.ui.modeler.application.FlowableModelerApplic
+ ation
+Spring-Boot-Classes: WEB-INF/classes/
+Spring-Boot-Lib: WEB-INF/lib/
+Created-By: Apache Maven 3.2.3
+Build-Jdk: 1.8.0_101
+
