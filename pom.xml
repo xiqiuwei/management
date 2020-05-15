@@ -54,7 +54,7 @@
         <amqp.rabbit>2.1.4.RELEASE</amqp.rabbit>
         <jedis.version>2.9.0</jedis.version>
         <redis.version>2.1.5.RELEASE</redis.version>
-        <json.jackson>2.9.3</json.jackson>
+        <json.jackson>2.9.10.1</json.jackson>
         <jwt.version>0.9.1</jwt.version>
         <mysql.connector.version>8.0.11</mysql.connector.version>
         <spring-cloud.version>Finchley.RC2</spring-cloud.version>
